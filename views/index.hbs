@@ -1,12 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anilog</title>
-</head>
-<body>
-    <h1>Welcome to Anilog!</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anilog</title>
+    </head>
+    <body>
+        <h1>Welcome to Anilog!</h1>
+
+        <form action="/" method="POST">
+        <label for="title">Title</label>
+        <input type="title" name="search">
+        
+        <p>Select desired genres: </p>
+        <fieldset class="checkbox-field">
+            <input type="checkbox" name="genre_in" value="action" id="Action">
+            <label for="Action">Action</label>
+
+            <input type="checkbox" name="genre_in" value="adventure" id="Adventure">
+            <label for="Adventure">Adventure</label>
+
+            <input type="checkbox" name="genre_in" value="comedy" id="Comedy">
+            <label for="Comedy">Comedy</label>
+
+            <input type="checkbox" name="genre_in" value="drama" id="Drama">
+            <label for="Drama">Drama</label>
+
+            <input type="checkbox" name="genre_in" value="ecchi" id="Ecchi">
+            <label for="Ecchi">Ecchi</label>
+
+            <input type="checkbox" name="genre_in" value="fantasy" id="Fantasy">
+            <label for="Fantasy">Fantasy</label>
+
+            <input type="checkbox" name="genre_in" value="hentai" id="Hentai">
+            <label for="Hentai">Hentai</label>
+
+            <input type="checkbox" name="genre_in" value="mahou shoujo" id="Mahou Shoujo">
+            <label for="Mahou Shoujo">Mahou Shoujo</label>
+
+            <input type="checkbox" name="genre_in" value="mecha" id="Mecha">
+            <label for="Mecha">Mecha</label>
+
+            <input type="checkbox" name="genre_in" value="music" id="Music">
+            <label for="Music">Music</label>
+
+            <input type="checkbox" name="genre_in" value="mystery" id="Mystery">
+            <label for="Mystery">Mystery</label>
+
+            <input type="checkbox" name="genre_in" value="" id="Psychological">
+            <label for="Psychological">Psychological</label>
+
+            <input type="checkbox" name="genre_in" value="psychological" id="Romance">
+            <label for="Romance">Romance</label>
+
+            <input type="checkbox" name="genre_in" value="sci-fi" id="Sci-Fi">
+            <label for="Sci-Fi">Sci-Fi</label>
+
+            <input type="checkbox" name="genre_in" value="slice of life" id="Slice of Life">
+            <label for="Slice of Life">Slice of Life</label>
+
+            <input type="checkbox" name="genre_in" value="sports" id="Sports">
+            <label for="Sports">Sports</label>
+
+            <input type="checkbox" name="genre_in" value="supernatural" id="Supernatural">
+            <label for="Supernatural">Supernatural</label>
+
+            <input type="checkbox" name="genre_in" value="thriller" id="Thriller">
+            <label for="Thriller">Thriller</label>
+        </fieldset>
+
+        <label for="status">Status</label>
+        
+        <br>
+
+        <button type="submit">Go</button>    
+        </form>
+
+        {{#if anime}}
+        <h2>{{anime.title.english}} || {{anime.title.romaji}} </h2>
+        {{/if}}
+    </body>
 </html>
