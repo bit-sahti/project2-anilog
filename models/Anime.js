@@ -24,6 +24,7 @@ const Anime = model('Anime', new Schema({
     genres: [String],
     tags: [String],
     status: String,
+    averageScore: Number,
     //Format info
     format: String,
     episodes: Number,
@@ -38,10 +39,10 @@ const Anime = model('Anime', new Schema({
     director: String,
     mainStudio: String,
     //Site related activity
-    favoriteOf: [{ type: Types.ObjectId, ref: User}],
-    beingWatchedBy: [{ type: Types.ObjectId, ref: User}],
-    watchedBy: [{ type: Types.ObjectId, ref: User}],
-    toBeWatchedBy: [{ type: Types.ObjectId, ref: User}]
+    favoriteOf: [{ type: Types.ObjectId, ref: 'User'}],
+    beingWatchedBy: [{ type: Types.ObjectId, ref: 'User'}],
+    watchedBy: [{ type: Types.ObjectId, ref: 'User'}],
+    toBeWatchedBy: [{ type: Types.ObjectId, ref: 'User'}]
 }))
 
 module.exports = Anime;
