@@ -22,21 +22,32 @@ const Anime = model('Anime', new Schema({
     //Descriptive info
     description: String,
     genres: [String],
-    tags: [String],
+    generalTags: [String],
+    spoilerTags: [String],
+    adultTags: [String],
+    status: String,
     averageScore: Number,
     //Format info
     format: String,
     episodes: Number,
-    duration: Number,
+    duration: String,
     //Release info
     status: String,
-    startDate: Date,
-    endDate: Date,
+    startDate: {
+        year: Number,
+        month: Number,
+        day: Number
+    },
+    endDate: {
+        year: Number,
+        month: Number,
+        day: Number
+    },
     //Staff info
     source: String,
-    originalCreator: String,
-    director: String,
-    mainStudio: String,
+    creation: [String],
+    direction: [String],
+    studio: String,
     //Site related activity
     favoriteOf: [{ type: Types.ObjectId, ref: 'User'}],
     beingWatchedBy: [{ type: Types.ObjectId, ref: 'User'}],
