@@ -23,7 +23,6 @@ const Anime = model('Anime', new Schema({
     description: String,
     genres: [String],
     tags: [String],
-    status: String,
     averageScore: Number,
     //Format info
     format: String,
