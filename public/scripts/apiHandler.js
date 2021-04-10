@@ -1,5 +1,3 @@
-const axios = require('axios').default;
-
 class AniListHandler {
     constructor() {
         this.method = 'POST'
@@ -44,7 +42,8 @@ class AniListHandler {
                 averageScore
                 tags {
                     name
-                    description
+                    isMediaSpoiler
+                    isAdult
                 }
                 genres
                 format
@@ -141,15 +140,20 @@ class AniListHandler {
                     variables                
                 }    
             })
-        
-            console.log(response.data.data.Page)
+            
+            const animes = mapper.formatData(response.data.data.Page.media)
+
+            return {
+                pageInfo: response.data.data.Page.pageInfo,
+                media: animes
+            }
         }
     
         catch (err) {
-            console.log(err.response.data.errors);
+            err.response.data.errors ? console.log(err.response.data.errors) : console.log(err);
         }
     }
 
 }
 
-module.exports = new AniListHandler();
+const aniList = new AniListHandler();

@@ -1,7 +1,6 @@
-const router = require('express').Router();
+const router = require('express')();
 const Anime = require('../models/Anime')
 const User = require('../models/User')
-const aniList = require('../controllers/apiHandler')
 
 router.get('/', (req, res, next) => {
     console.log('Get request on root completed');
@@ -9,8 +8,8 @@ router.get('/', (req, res, next) => {
     res.render('index')
 });
 
-router.post('/', async (req, res, next) => {
-    aniList.searchMedia(req.body);
-})
+// router.post('/', async (req, res, next) => {
+//     res.send(page)
+// })
 
 module.exports = router;
