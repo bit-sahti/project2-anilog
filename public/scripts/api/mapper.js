@@ -53,12 +53,9 @@ class Mapper {
     }
 
     getStudio(studios) {
-        // console.log('here', studios);
         if (!studios.nodes.length) return "Various";
 
-        // console.log(studios)
-
-        return studios.nodes[0].name
+        return studios.nodes[0].name;
     }
 
     formatData(rawAnimes){
