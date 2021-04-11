@@ -10,6 +10,10 @@ const app = express();
 //Connect to database
 require('./configs/mongodb');
 
+//Set the session
+session = require('./configs/session');
+session(app)
+
 //Set body parsers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

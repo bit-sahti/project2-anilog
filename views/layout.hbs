@@ -10,8 +10,14 @@
     <nav>
         <ul>
             <li><a href="/">Main</a></li>
+            {{#unless currentUser}}
             <li><a href="/signup">Sign up</a></li>
             <li><a href="/login">Log in</a></li>
+            {{/unless}}
+            
+            {{#if currentUser}}
+            <li><a href="/logout">Log out</a></li>
+            {{/if}}
         </ul>
     </nav>
         {{{body}}}
