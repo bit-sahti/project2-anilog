@@ -22,8 +22,11 @@ app.set('views', __dirname + '/views');
 app.use(express.static('public'));
 
 //Import and set main route;
-const mainRoute = require('./routes/main.route');
-app.use('/', mainRoute)
+const mainRoutes = require('./routes/main.route');
+app.use('/', mainRoutes)
+
+const authRoutes = require('./routes/auth.routes');
+app.use('/', authRoutes)
 
 app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`))
 

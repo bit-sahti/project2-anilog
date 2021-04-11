@@ -1,0 +1,35 @@
+<h1>Create an account</h1>
+
+<form action="/signup" method="POST">
+    <div>
+        <label for="username">Choose an username</label>
+        <input id="username" type="text" name="username">
+    </div>
+    <div>
+        <label for="email">Type your email</label>
+        <input id="email" type="email" name="email">
+    </div>
+    <div>
+        <label for="birthDate">Inform your birth date</label>
+        <input id="birthDate" type="date" name="birthDate">
+    </div>
+    <div>
+        <label for="password">Create a password</label>
+        <input id="password" type="password" name="password" placeholder="At least 6 characters long">
+    </div>
+    <div>
+        <label for="passConfirmation">Confirm your password</label>
+        <input id="passConfirmation" type="password" name="passConfirmation" placeholder="At least 6 characters long">
+    </div>
+    <div>
+        <label for="resetPassQuestion">Choose a question to verify your identity in case you forget your password</label>
+        <input id="resetPassQuestion" type="text" name="resetPassQuestion">
+    </div>
+    <div>
+        <label for="resetPassAnswer">Write the correct answer.</label>
+        <input id="resetPassAnswer" type="password" name="resetPassAnswer">
+    </div>
+    
+    <br>
+    <button type="submit">Create account</button>
+</form>
