@@ -6,7 +6,7 @@ class AniListHandler {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        this.mediaSearchParams = `type: ANIME`
+        this.mediaSearchParams = `type: ANIME, isAdult: false`
         this.mediaParams = `
                 id
                 isAdult
@@ -145,7 +145,7 @@ class AniListHandler {
 
             return {
                 pageInfo: response.data.data.Page.pageInfo,
-                media: animes
+                animes: animes
             }
         }
     
