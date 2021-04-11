@@ -62,8 +62,7 @@ class Mapper {
     }
 
     formatData(rawAnimes){
-        // console.log(this.get(1, rawAnimes.tags))
-        const animes = rawAnimes.map(anime => {
+        return rawAnimes.map(anime => {
             const treatedAnime = {
                 externalId: anime.id,
                 isAdult: anime.isAdult,
