@@ -1,11 +1,28 @@
 document.getElementById('go').addEventListener('click', async event => {
-    event.preventDefault()
+    try {
+        event.preventDefault();
+    
+        const titleInput = document.getElementById("title")
 
-    const text = document.getElementById("title").name
+        const { animes } = await aniList.searchMedia({[titleInput.name]: titleInput.value});
+        console.log(animes);
 
-    // const response = await aniList.searchMedia({search: text})
+        const resultsSection = document.getElementById("search-results")
+        resultsSection.innerHTML = '';
 
-    console.log(text)
+        animes.forEach(anime => {
+            document.getElementById("search-results").innerHTML += `
+            <div class="anime-card">
+                <div>
+                    <img src="${anime.coverImage.medium}" alt="">
+                </div>
+                <h3><a href="/details?id${anime.externalId}">${anime.title.english ? anime.title.english : anime.title.romaji }</a></h3>
 
-
+            </div>
+            `
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
 })

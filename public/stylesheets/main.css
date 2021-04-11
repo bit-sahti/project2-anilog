@@ -1,0 +1,14 @@
+#search-results {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.anime-card {
+    border: 1px solid antiquewhite;
+    width: 180px;
+    height: 230px;
+}
+#go {
+    margin: 10px  0;
+}

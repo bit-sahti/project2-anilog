@@ -7,13 +7,14 @@
         <title>Anilog</title>
     </head>
     <body>
+        <link rel="stylesheet" href="/stylesheets/main.css">
         <h1>Welcome to Anilog!</h1>
 
         <form action="/" method="POST">
         <label for="title">Title</label>
         <input type="name" name="search" id="title">
         
-        <p>Select desired genres: </p>
+        {{!-- <p>Select desired genres: </p>
         <fieldset class="checkbox-field">
             <input type="checkbox" name="genre_in" value="action" id="Action">
             <label for="Action">Action</label>
@@ -32,9 +33,6 @@
 
             <input type="checkbox" name="genre_in" value="fantasy" id="Fantasy">
             <label for="Fantasy">Fantasy</label>
-
-            <input type="checkbox" name="genre_in" value="hentai" id="Hentai">
-            <label for="Hentai">Hentai</label>
 
             <input type="checkbox" name="genre_in" value="mahou shoujo" id="Mahou Shoujo">
             <label for="Mahou Shoujo">Mahou Shoujo</label>
@@ -68,17 +66,15 @@
 
             <input type="checkbox" name="genre_in" value="thriller" id="Thriller">
             <label for="Thriller">Thriller</label>
-        </fieldset>
-
-        <label for="status">Status</label>
+        </fieldset> --}}
         
-        <br>
+        <br/>
 
         <button type="submit" id="go">Go</button>    
         </form>
 
-        {{#if anime}}
-        <h2>{{anime.title.english}} || {{anime.title.romaji}} </h2>
-        {{/if}}
+        <section id="search-results">
+
+        </section>
     </body>
 </html>
