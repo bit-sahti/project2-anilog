@@ -1,3 +1,6 @@
+const axios = require('axios');
+const mapper = require('./mapper')
+
 class AniListHandler {
     constructor() {
         this.method = 'POST'
@@ -6,7 +9,7 @@ class AniListHandler {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        this.mediaSearchParams = `type: ANIME, isAdult: false`
+        this.mediaSearchParams = `type: ANIME`
         this.mediaParams = `
                 id
                 isAdult
@@ -77,54 +80,21 @@ class AniListHandler {
                         name
                     }
                 }
-        `,
-        this.pageInfoParams = `
-                pageInfo {
-                    total
-                    currentPage
-                    hasNextPage
-                }
         `
     }
 
-    getMediaQuery(obj) {
-        const entries = Object.keys(obj);
-        const entriesValues = Object.values(obj);
-
-        const queryParams = entries.map(entry => {
-            switch(entry) {
-                case 'search':
-                    return entry = `$${entry}: String`;
-                case 'genre_in':
-                    return entry = `$${entry}: [String]`
-            }
-        }).join(', ');
-
-
-        const mediaSearchParams = entries.map(entry => entry = `${entry}: $${entry}`);
-
-        const variables = entries.reduce((acc, a, i) => {
-            acc[a] = entriesValues[i]
-            return acc
-        }, {})
-
+    async getAnime(externalId) {
         const query = `
-            query(${queryParams}) {
-                Page(page: 1, perPage: 30) {
-                    ${this.pageInfoParams}
-                    media(${this.mediaSearchParams + ',' + mediaSearchParams}) {
-                        ${this.mediaParams}
-                    }
+            query($id: Int) {
+                Media(id: $id) {
+                    ${this.mediaParams}
                 }
             }
         `
 
-        return [query, variables]
-    }
-
-    async searchMedia(params) {
-        const query = this.getMediaQuery(params)[0]
-        const variables = this.getMediaQuery(params)[1]
+        const variables = {
+            id: Number(externalId)
+        }
 
         try {
             const response = await axios({
@@ -133,27 +103,23 @@ class AniListHandler {
                 headers: this.headers,
                 body: JSON.stringify({
                     query: query,
-                    variables: variables
+                    variables: externalId
                 }),
                 data: {
                     query,
-                    variables                
+                    variables         
                 }    
             })
-            
-            const animes = mapper.formatData(response.data.data.Page.media)
 
-            return {
-                pageInfo: response.data.data.Page.pageInfo,
-                animes: animes
-            }
+            const anime = mapper.formatData(response.data.data.Media)
+            return anime;
         }
-    
-        catch (err) {
-            err.response.data.errors ? console.log(err.response.data.errors) : console.log(err);
+
+        catch(err) {
+            err.response ? console.log(err.response.data.errors) : console.log(err);
         }
     }
 
 }
 
-const aniList = new AniListHandler();
+module.exports = new AniListHandler();
