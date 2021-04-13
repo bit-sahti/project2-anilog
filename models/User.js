@@ -15,9 +15,10 @@ const User = model('User', new Schema({
     description: String,
     socialMedia: {
         // type: { type: String },
-        facebook: { type: String},
-        twitter: { type: String},
-        discord: { type: String}
+        facebook: String,
+        twitter: String,
+        discord: String,
+        isPublic: { type: Boolean, default: false }
     },
     //Lists
     favorites: [ { type: Types.ObjectId, ref: 'Anime' } ],
@@ -29,6 +30,9 @@ const User = model('User', new Schema({
     friends: [ { type: Types.ObjectId, ref: 'User' } ],
     following: [ { type: Types.ObjectId, ref: 'User' } ],
     followers: [ { type: Types.ObjectId, ref: 'User' } ],
+},
+{
+    timestamps: true
 }))
 
 module.exports = User;
