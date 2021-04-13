@@ -5,11 +5,8 @@ const User = require('../models/User')
 router.get('/', (req, res, next) => {
     console.log('Get request on root completed');
 
-    res.render('index')
+    req.session.currentUser ? res.render('index', { currentUser: req.session.currentUser}) 
+                            : res.render('index')
 });
-
-// router.post('/', async (req, res, next) => {
-//     res.send(page)
-// })
 
 module.exports = router;
