@@ -16,7 +16,7 @@ document.getElementById('go').addEventListener('click', async event => {
                 <div>
                     <img src="${anime.coverImage.medium}" alt="">
                 </div>
-                <h3><a href="/details?id${anime.externalId}">${anime.title.english ? anime.title.english : anime.title.romaji }</a></h3>
+                <h3><a href="/anime?id=${anime.externalId}">${anime.title.english ? anime.title.english : anime.title.romaji }</a></h3>
 
             </div>
             `

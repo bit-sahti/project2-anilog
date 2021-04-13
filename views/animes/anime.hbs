@@ -1,0 +1,22 @@
+<h1></h1>
+
+
+<h1>{{anime.title.romaji}}</h1>
+
+{{#if anime.title.english}}
+    
+<span>{{anime.title.english}}</span>
+
+{{/if}}
+
+{{#if currentUser}}
+    <h3>Add to list:</h3>
+
+    <ul>
+        <li><a href="/anime/add?list=toWatch&id={{anime.externalId}}">To watch</a></li>
+        <li><a href="/anime/add?list=watching&id={{anime.externalId}}">Watching</a></li>
+        <li><a href="/anime/add?list=watched&id={{anime.externalId}}">Watched</a></li>
+        <li><a href="/anime/add?list=favorites&id={{anime.externalId}}">Favorites</a></li>
+    </ul>
+    <p>{{currentUser.username}}</p>
+{{/if}}
