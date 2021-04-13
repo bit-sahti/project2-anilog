@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
+const session = require('../configs/session');
 
 const encrypt = (word) => {
     const salt = bcrypt.genSaltSync(10);
@@ -22,6 +23,8 @@ router.post('/signup', async (req, res, next) => {
     
     const { username, email, birthDate, password, resetPassQuestion, resetPassAnswer } = req.body
 
+    console.log(typeof birthDate);
+
     const newUser = {
         username,
         email,
@@ -40,6 +43,39 @@ router.post('/signup', async (req, res, next) => {
     catch(err) {
         console.log(err);
     }
+})
+
+router.get('/login', (req, res, next) => {
+    res.render('login')
+})
+
+router.post('/login', async (req, res, next) => {
+    const { email, password } = req.body;
+
+    try {
+        const userFromDb = await User.findOne({ email })
+
+        if (!userFromDb) res.redirect('/signup');
+        console.log(decrypt(password, userFromDb.password));
+
+        if (!decrypt(password, userFromDb.password)) {
+            return res.render('login', { authError: 'Email ou senha incorretos' })
+        }
+        
+        req.session.currentUser = userFromDb;
+
+        res.redirect('/')
+    }
+
+    catch(err) {
+        console.log(err);
+    }
+})
+
+router.get('/logout', (req, res, next) => {
+    req.session.destroy();
+
+    res.redirect('/')
 })
 
 module.exports = router;
