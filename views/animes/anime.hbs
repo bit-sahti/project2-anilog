@@ -13,10 +13,10 @@
     <h3>Add to list:</h3>
 
     <ul>
-        <li><a href="/anime/add?list=toWatch&id={{anime.externalId}}">To watch</a></li>
-        <li><a href="/anime/add?list=watching&id={{anime.externalId}}">Watching</a></li>
-        <li><a href="/anime/add?list=watched&id={{anime.externalId}}">Watched</a></li>
-        <li><a href="/anime/add?list=favorites&id={{anime.externalId}}">Favorites</a></li>
+        <li><a href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">To watch</a></li>
+        <li><a href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Watching</a></li>
+        <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Watched</a></li>
+        <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Favorites</a></li>
     </ul>
     <p>{{currentUser.username}}</p>
 {{/if}}
