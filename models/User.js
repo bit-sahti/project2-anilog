@@ -6,6 +6,7 @@ const User = model('User', new Schema({
     email: { type: String, unique: true, required: true },
     birthDate: { type: Date, required: true },
     avatarPicture: { type: String, default: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'},
+    role: { type: String, enum: ['user', 'moderator', 'admin'], default: 'user'},
     //Authentication
     password: { type: String, required: true },
     resetPassQuestion: { type: String, required: true },
