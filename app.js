@@ -32,12 +32,8 @@ app.use('/', mainRoutes)
 const authRoutes = require('./routes/auth.routes');
 app.use('/', authRoutes)
 
-app.use('/', (req, res, next) => {
-    if (req.session.currentUser) next();
-
-    res.redirect('/login')
-})
 const animeRoutes = require('./routes/animes.routes')
 app.use('/anime', animeRoutes)
+
 app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`))
 
