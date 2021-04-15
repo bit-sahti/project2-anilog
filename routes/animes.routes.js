@@ -7,9 +7,6 @@ router.get('/', async (req, res, next) => {
    try {
     const anime = await AniList.getAnime(req.query.id);
 
-    // let test = encodeURIComponent(JSON.stringify(anime))
-    // console.log(JSON.parse(decodeURIComponent(test)))
-
     res.render('./animes/anime', { anime: anime, currentUser: req.session.currentUser })
    }
 
@@ -53,9 +50,40 @@ router.get('/add', async (req, res, next) => {
 
     res.redirect(`/anime/?id=${anime.externalId}`)
    }
+
    catch(err) {
     console.log('error ========> ', err);
-}
+    }
 })
 
+router.get('/remove', async (req, res, next) => {
+    const { _id: userId } = req.session.currentUser;
+    const { id: animeId, userList, animeList } = req.query;
+    const currentUser = await User.findById(userId);
+
+    console.log(req.query);
+    
+   try {
+    const anime = await Anime.findOne({ externalId: animeId });
+    const animeListIndex = anime[animeList].indexOf(userId);
+    const userListIndex = currentUser[userList].indexOf(anime._id);
+
+    console.log('before removal', animeListIndex, userListIndex );
+
+    anime[animeList].splice(animeListIndex, 1)
+    currentUser[userList].splice(userListIndex, 1)
+
+    await anime.save();
+    await currentUser.save();
+
+    console.log('after removal',animeListIndex, userListIndex );
+
+
+    res.redirect(`/anime/?id=${anime.externalId}`)
+   }
+
+   catch(err) {
+    console.log('error ========> ', err);
+    }
+})
 module.exports = router;

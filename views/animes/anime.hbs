@@ -18,5 +18,12 @@
         <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Watched</a></li>
         <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Favorites</a></li>
     </ul>
+        <li><a href="/anime/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Remove from to watch list</a></li>
+        <li><a href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a></li>
+        <li><a href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a></li>
+        <li><a href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a></li>
+    <ul>
+
+    </ul>
     <p>{{currentUser.username}}</p>
 {{/if}}
