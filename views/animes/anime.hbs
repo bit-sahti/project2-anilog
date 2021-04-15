@@ -10,20 +10,31 @@
 {{/if}}
 
 {{#if currentUser}}
-    <h3>Add to list:</h3>
-
     <ul>
-        <li><a href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">To watch</a></li>
-        <li><a href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Watching</a></li>
-        <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Watched</a></li>
-        <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Favorites</a></li>
-    </ul>
+        {{#if onToWatchList}}
         <li><a href="/anime/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Remove from to watch list</a></li>
-        <li><a href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a></li>
-        <li><a href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a></li>
-        <li><a href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a></li>
-    <ul>
+        {{else}}
+        <li><a href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Add to watch list</a></li>
+        {{/if}}
 
+        {{#if onWatchingList}}
+        <li><a href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a></li>
+        {{else}}
+        <li><a href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Add to watching list</a></li>
+        {{/if}}
+
+        {{#if onWatchedList}}
+        <li><a href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a></li>
+        {{else}}
+        <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Add to watched list</a></li>
+        {{/if}}
+
+        {{#if onFavoritesList}}
+        <li><a href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a></li>
+        {{else}}
+        <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Add to favorites list</a></li>
+        {{/if}}
+        
     </ul>
     <p>{{currentUser.username}}</p>
 {{/if}}

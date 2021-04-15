@@ -4,10 +4,38 @@ const Anime = require('../models/Anime')
 const AniList = require('./utils/backApiHandler')
 
 router.get('/', async (req, res, next) => {
-   try {
-    const anime = await AniList.getAnime(req.query.id);
+    const { id: animeId } = req.query;
+    
+    let onToWatchList = false;
+    let onWatchedList = false;
+    let onWatchingList = false;
+    let onFavoritesList = false;
 
-    res.render('./animes/anime', { anime: anime, currentUser: req.session.currentUser })
+   try {
+    let anime = await Anime.findOne({ externalId: animeId });
+
+    if (anime && req.session.currentUser) {
+        const { _id: userId } = req.session.currentUser;
+
+        onToWatchList = anime.toBeWatchedBy.includes(userId);
+        onWatchingList = anime.beingWatchedBy.includes(userId);
+        onWatchedList = anime.watchedBy.includes(userId);
+        onFavoritesList = anime.favoriteOf.includes(userId);
+
+        console.log(onToWatchList, onWatchingList, onWatchedList, onFavoritesList)
+
+    } else {
+        anime = await AniList.getAnime(animeId);
+    }  
+
+    res.render('./animes/anime', { 
+        anime: anime, 
+        currentUser: req.session.currentUser,
+        onToWatchList,
+        onWatchedList,
+        onWatchingList,
+        onFavoritesList        
+     })
    }
 
    catch(err) {
