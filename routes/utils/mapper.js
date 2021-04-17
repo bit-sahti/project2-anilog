@@ -58,38 +58,41 @@ class Mapper {
         return studios.nodes[0].name;
     }
 
-    formatData(anime) {        
+    formatData(anime){
         return {
-            externalId: anime.id,
-            isAdult: anime.isAdult,
-            title: anime.title,
-            synonyms: anime.synonyms,
-            coverImage: {
-                extraLarge: anime.coverImage.extraLarge,
-                large: anime.coverImage.large,
-                medium: anime.coverImage.medium,
-            },
-            bannerImage: anime.bannerImage,
-            trailer: this.getTrailer(anime.trailer),
-            relations: this.getRelatedIds(anime.relations.nodes),
-            description: anime.description,
-            genres: anime.genres,
-            generalTags: this.getTags(1, anime.tags),
-            spoilerTags: this.getTags(2, anime.tags),
-            adultTags: this.getTags(3, anime.tags),
-            averageScore: anime.averageScore,
-            format: anime.format,
-            episodes: anime.episodes,
-            duration: anime.duration,
-            status: anime.status,
-            startDate: anime.startDate,
-            endDate: anime.endDate,
-            source: anime.source,
-            creation: this.getStaff(1, 'Original', anime.staff.edges),
-            direction: this.getStaff(2, 'Director', anime.staff.edges),
-            studio: this.getStudio(anime.studios)
-        }
-       
+                externalId: anime.id,
+                isAdult: anime.isAdult,
+                title: anime.title,
+                synonyms: anime.synonyms,
+                coverImage: {
+                    extraLarge: anime.coverImage.extraLarge,
+                    large: anime.coverImage.large,
+                    medium: anime.coverImage.medium,
+                },
+                bannerImage: anime.bannerImage,
+                trailer: this.getTrailer(anime.trailer),
+                relations: this.getRelatedIds(anime.relations.nodes),
+                description: anime.description,
+                genres: anime.genres,
+                generalTags: this.getTags(1, anime.tags),
+                spoilerTags: this.getTags(2, anime.tags),
+                adultTags: this.getTags(3, anime.tags),
+                averageScore: anime.averageScore,
+                format: anime.format,
+                episodes: anime.episodes,
+                duration: anime.duration,
+                status: anime.status,
+                startDate: anime.startDate,
+                endDate: anime.endDate,
+                source: anime.source,
+                creation: this.getStaff(1, 'Original', anime.staff.edges),
+                direction: this.getStaff(2, 'Director', anime.staff.edges),
+                studio: this.getStudio(anime.studios)
+            }
+    }
+
+    formatBulkData(rawAnimes) {
+        return rawAnimes.map(anime => this.formatData(anime))
     }
 }
 

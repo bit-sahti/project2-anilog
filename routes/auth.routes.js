@@ -64,6 +64,8 @@ router.post('/login', async (req, res, next) => {
         
         req.session.currentUser = userFromDb;
 
+        console.log(req.session.currentUser);
+
         res.redirect('/')
     }
 

@@ -2,72 +2,54 @@
         <link rel="stylesheet" href="/stylesheets/main.css">
         <h1>Welcome to Anilog!</h1>
 
-        <form action="/" method="POST">
+        <form action="/" method="GET">
+        <input type="number" name="page" id="page" {{#if query.page}} value={{query.page}} {{else}} value="1"{{/if}}>
+        <input type="number" name="perPage" id="perPage" {{#if query.perPage}} value={{query.perPage}} {{else}} value="30"{{/if}}>
         <label for="title">Title</label>
-        <input type="name" name="search" id="title">
-        
-        {{!-- <p>Select desired genres: </p>
-        <fieldset class="checkbox-field">
-            <input type="checkbox" name="genre_in" value="action" id="Action">
-            <label for="Action">Action</label>
+        <input type="name" name="search" id="title" {{#if query.search}} value="{{query.search}}" {{/if}}>
 
-            <input type="checkbox" name="genre_in" value="adventure" id="Adventure">
-            <label for="Adventure">Adventure</label>
-
-            <input type="checkbox" name="genre_in" value="comedy" id="Comedy">
-            <label for="Comedy">Comedy</label>
-
-            <input type="checkbox" name="genre_in" value="drama" id="Drama">
-            <label for="Drama">Drama</label>
-
-            <input type="checkbox" name="genre_in" value="ecchi" id="Ecchi">
-            <label for="Ecchi">Ecchi</label>
-
-            <input type="checkbox" name="genre_in" value="fantasy" id="Fantasy">
-            <label for="Fantasy">Fantasy</label>
-
-            <input type="checkbox" name="genre_in" value="mahou shoujo" id="Mahou Shoujo">
-            <label for="Mahou Shoujo">Mahou Shoujo</label>
-
-            <input type="checkbox" name="genre_in" value="mecha" id="Mecha">
-            <label for="Mecha">Mecha</label>
-
-            <input type="checkbox" name="genre_in" value="music" id="Music">
-            <label for="Music">Music</label>
-
-            <input type="checkbox" name="genre_in" value="mystery" id="Mystery">
-            <label for="Mystery">Mystery</label>
-
-            <input type="checkbox" name="genre_in" value="" id="Psychological">
-            <label for="Psychological">Psychological</label>
-
-            <input type="checkbox" name="genre_in" value="psychological" id="Romance">
-            <label for="Romance">Romance</label>
-
-            <input type="checkbox" name="genre_in" value="sci-fi" id="Sci-Fi">
-            <label for="Sci-Fi">Sci-Fi</label>
-
-            <input type="checkbox" name="genre_in" value="slice of life" id="Slice of Life">
-            <label for="Slice of Life">Slice of Life</label>
-
-            <input type="checkbox" name="genre_in" value="sports" id="Sports">
-            <label for="Sports">Sports</label>
-
-            <input type="checkbox" name="genre_in" value="supernatural" id="Supernatural">
-            <label for="Supernatural">Supernatural</label>
-
-            <input type="checkbox" name="genre_in" value="thriller" id="Thriller">
-            <label for="Thriller">Thriller</label>
-        </fieldset> --}}
-        
+        <label for="genres">Genres</label>
+        <select name="genre_in" id="genres" multiple>
+            <option value="action" {{#if query.action}} selected {{/if}}>Action</option>
+            <option value="adventure"{{#if query.adventure}} selected {{/if}}>Adventure</option>
+            <option value="comedy"{{#if query.comedy}} selected {{/if}}>Comedy</option>
+            <option value="drama"{{#if query.drama}} selected {{/if}}>Drama</option>
+            <option value="ecchi"{{#if query.ecchi}} selected {{/if}}>Ecchi</option>
+            <option value="fantasy"{{#if query.fantasy}} selected {{/if}}>Fantasy</option>
+            <option value="mahou shoujo"{{#if query.[mahou shoujo]}} selected {{/if}}>Mahou shoujo</option>
+            <option value="mecha"{{#if query.mecha}} selected {{/if}}>Mecha</option>
+            <option value="music"{{#if query.music}} selected {{/if}}>Music</option>
+            <option value="mytery"{{#if query.mytery}} selected {{/if}}>Mistery</option>
+            <option value="psychological">{{#if query.psychological}} selected {{/if}}Psychological</option>
+            <option value="sci-fi"{{#if query.sci-fi}} selected {{/if}}>Sci-fi</option>
+            <option value="slice of life"{{#if query.[slice of life]}} selected {{/if}}>Slice of Life</option>
+            <option value="sports"{{#if query.sports}} selected {{/if}}>Sports</option>
+            <option value="supernatural"{{#if query.supernatural}} selected {{/if}}>Supernatural</option>
+            <option value="thriller"{{#if query.thriller}} selected {{/if}}>Thriller</option>
+        </select>
         <br/>
-
-        <button type="submit" id="go">Go</button>    
+        <button type="submit" id="go">Go</button>  
+            {{#if pageInfo.hasNextPage}}
+                <button id="next">Next page</button>                  
+            {{/if}}
         </form>
 
         <section id="search-results">
 
         </section>
-
+        <section id="search-results">
+            {{#if animes }} 
+                {{#each animes}}
+                    <div class="anime-card">
+                        <div>
+                            <img src="{{this.coverImage.medium}}" alt="">
+                        </div>
+                        <h3><a href="/anime?id={{anime.externalId}}">{{this.title.romaji }}</a></h3>
+                    </div>
+                {{/each}}
+            {{else}}
+                <h3>No results</h3>
+            {{/if}}
+        </section>
 
     <script src="/scripts/main.js"></script>

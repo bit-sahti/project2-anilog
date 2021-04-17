@@ -1,28 +1,48 @@
-document.getElementById('go').addEventListener('click', async event => {
-    try {
-        event.preventDefault();
+// const getAnimes = async event => {
+//     try {
+//         // if (event) event.preventDefault();
     
-        const titleInput = document.getElementById("title")
+//         const titleInput = document.getElementById("title")
+        
+//         const genre_in = document.querySelectorAll('input[name="genre_in"]')
+//         const genreValues = []
 
-        const { animes } = await aniList.searchMedia({[titleInput.name]: titleInput.value});
-        console.log(animes);
+//         for (let i = 0; i < genre_in.length; i++) {
+//             if (genre_in[i].checked) genreValues.push(genre_in[i].value)
+//         }
 
-        const resultsSection = document.getElementById("search-results")
-        resultsSection.innerHTML = '';
+//         const { animes } = await aniList.searchMedia({
+//             [titleInput.name]: titleInput.value,
+//             genre_in: genreValues
+//         });
+//         console.log(animes);
 
-        animes.forEach(anime => {
-            document.getElementById("search-results").innerHTML += `
-            <div class="anime-card">
-                <div>
-                    <img src="${anime.coverImage.medium}" alt="">
-                </div>
-                <h3><a href="/anime?id=${anime.externalId}">${anime.title.english ? anime.title.english : anime.title.romaji }</a></h3>
+//         const resultsSection = document.getElementById("search-results")
+//         resultsSection.innerHTML = '';
 
-            </div>
-            `
-        })
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
+//         animes.forEach(anime => {
+//             document.getElementById("search-results").innerHTML += `
+//             <div class="anime-card">
+//                 <div>
+//                     <img src="${anime.coverImage.medium}" alt="">
+//                 </div>
+//                 <h3><a href="/anime?id=${anime.externalId}">${anime.title.english ? anime.title.english : anime.title.romaji }</a></h3>
+
+//             </div>
+//             `
+//         })
+//     }
+//     catch (err) {
+//         console.log(err);
+//     }
+// }
+
+// // getAnimes()
+// document.getElementById('go').addEventListener('click', getAnimes)
+// window.onhashchange = () => console.log('test');
+
+document.getElementById('next').onclick = event => {
+    let page = document.getElementById('page');
+    page.value = Number(page.value) + 1;
+    console.log(document.getElementById('page').value)
+}

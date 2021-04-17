@@ -80,6 +80,13 @@ class AniListHandler {
                         name
                     }
                 }
+        `,
+        this.pageInfoParams = `
+                pageInfo {
+                    total
+                    currentPage
+                    hasNextPage
+                }
         `
     }
 
@@ -116,6 +123,78 @@ class AniListHandler {
         }
 
         catch(err) {
+            err.response ? console.log(err.response.data.errors) : console.log(err);
+        }
+    }
+
+    getMediaQuery(obj) {
+        const entries = Object.entries(obj).filter(( [ key, value ] ) => value.length).map(( [ key, value ] ) => key);
+        const entriesValues = Object.entries(obj).filter(( [ key, value ] ) => value.length).map(( [key, value] ) => value);
+
+        const queryParams = entries.map(entry => {
+            switch(entry) {
+                case 'search':
+                    return entry = `$${entry}: String`;
+                case 'genre_in':
+                    return entry = `$${entry}: [String]`;
+            }
+        }).join(', ');
+
+
+        const mediaSearchParams = entries.slice(2).map(entry => entry = `${entry}: $${entry}`);
+
+        const variables = entries.reduce((acc, a, i) => {
+            acc[a] = entriesValues[i]
+            return acc
+        }, {})
+
+        const query = `
+            query($page: Int, $perPage: Int, ${queryParams}) {
+                Page(page: $page, perPage: $perPage) {
+                    ${this.pageInfoParams}
+                    media(${this.mediaSearchParams + ',' + mediaSearchParams}) {
+                        ${this.mediaParams}
+                    }
+                }
+            }
+        `
+
+        // console.log(query, variables);
+
+        return [query, variables]
+    }
+
+    async searchMedia(params) {
+        const query = this.getMediaQuery(params)[0]
+        const variables = this.getMediaQuery(params)[1]
+
+        console.log(query, variables);
+
+        try {
+            const response = await axios({
+                method: this.method,
+                url: this.url,
+                headers: this.headers,
+                body: JSON.stringify({
+                    query: query,
+                    variables: variables
+                }),
+                data: {
+                    query,
+                    variables                
+                }    
+            })
+            
+            const animes = mapper.formatBulkData(response.data.data.Page.media)
+            console.log(response.data.data.Page.pageInfo);
+
+            return {
+                pageInfo: response.data.data.Page.pageInfo,
+                animes: animes
+            }
+        }
+    
+        catch (err) {
             err.response ? console.log(err.response.data.errors) : console.log(err);
         }
     }

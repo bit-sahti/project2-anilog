@@ -88,8 +88,8 @@ class AniListHandler {
     }
 
     getMediaQuery(obj) {
-        const entries = Object.keys(obj);
-        const entriesValues = Object.values(obj);
+        const entries = Object.entries(obj).filter( ([ key, value ]) => value.length).map(([ key, value ]) => key);
+        const entriesValues = Object.entries(obj).filter( ([ key, value ]) => value.length).map(([ key, value ]) => value);
 
         const queryParams = entries.map(entry => {
             switch(entry) {
@@ -109,7 +109,7 @@ class AniListHandler {
         }, {})
 
         const query = `
-            query(${queryParams}) {
+            query${queryParams ? '(' + queryParams + ')' : ''} {
                 Page(page: 1, perPage: 30) {
                     ${this.pageInfoParams}
                     media(${this.mediaSearchParams + ',' + mediaSearchParams}) {
@@ -119,12 +119,16 @@ class AniListHandler {
             }
         `
 
+        console.log(query, variables);
+
         return [query, variables]
     }
 
     async searchMedia(params) {
         const query = this.getMediaQuery(params)[0]
         const variables = this.getMediaQuery(params)[1]
+
+        console.log();
 
         try {
             const response = await axios({
