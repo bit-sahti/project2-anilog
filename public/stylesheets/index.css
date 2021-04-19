@@ -1,0 +1,51 @@
+/* Header */
+
+header {
+    margin: 0 auto 3rem;
+    width: 80%;
+    /* background-color: lightblue; */
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: right;
+}
+
+/* Sections */
+
+section {
+    width: 80%;
+    margin: 0 auto;
+    background-color: lightblue;
+}
+
+    /* Search area */
+
+.search {
+    margin-bottom: 3rem;
+}
+
+#search-results {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: 20px; */
+}
+
+.anime-card {
+    border: 1px solid antiquewhite;
+    width: 180px;
+    height: 230px;
+}
+
+#go {
+    margin: 10px  0;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,3 +1,12 @@
+$('.ui.dropdown')
+  .dropdown()
+;
+
+$('#search-select')
+  .dropdown()
+;
+
+
 // const getAnimes = async event => {
 //     try {
 //         // if (event) event.preventDefault();
@@ -42,7 +51,14 @@
 // window.onhashchange = () => console.log('test');
 
 document.getElementById('next').onclick = event => {
+    // event.preventDefault();
+
     let page = document.getElementById('page');
+    console.log(page.value);
     page.value = Number(page.value) + 1;
-    console.log(document.getElementById('page').value)
+    console.log(page.value)
+
+    setTimeout(() => {
+      console.log('waiting');
+    }, 5000)
 }
