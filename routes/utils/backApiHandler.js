@@ -1,5 +1,5 @@
 const axios = require('axios');
-const mapper = require('./mapper')
+const mapper = require('./apiMapper')
 
 class AniListHandler {
     constructor() {
@@ -134,17 +134,34 @@ class AniListHandler {
         const queryParams = entries.map(entry => {
             switch(entry) {
                 case 'search':
-                    return entry = `$${entry}: String`;
+                    return entry = `$search: String`;
                 case 'genre_in':
-                    return entry = `$${entry}: [String]`;
+                    return entry = `$genre_in: [String]`;
+                case 'seasonYear':
+                    return entry = `$seasonYear: Int`;
+                case 'season':
+                    return entry = `$season: MediaSeason`;
+                case 'status':
+                    return entry = `$status: MediaStatus`;
+                case 'format':
+                    return entry = `$format: MediaFormat`;
             }
         }).join(', ');
 
 
-        const mediaSearchParams = entries.slice(2).map(entry => entry = `${entry}: $${entry}`);
+        const mediaSearchParams = entries.slice(0, entries.length - 2).map(entry => `${entry}: $${entry}`);
 
-        const variables = entries.reduce((acc, a, i) => {
-            acc[a] = entriesValues[i]
+        const variables = entries.reduce((acc, prop, i) => {
+            acc[prop] = entriesValues[i];
+
+            if (prop === 'season' || prop === 'status' || prop === 'format') {
+                acc[prop] = acc[prop].toUpperCase()
+            }
+
+            // if (prop === 'seasonYear') {
+            //     acc.seasonYear = Number(entriesValues[i])
+            // }
+
             return acc
         }, {})
 
@@ -159,7 +176,9 @@ class AniListHandler {
             }
         `
 
-        // console.log(query, variables);
+        // ${this.mediaParams}
+
+        // console.log(query);
 
         return [query, variables]
     }
@@ -168,7 +187,10 @@ class AniListHandler {
         const query = this.getMediaQuery(params)[0]
         const variables = this.getMediaQuery(params)[1]
 
-        console.log(query, variables);
+        console.log(query);
+        console.log(variables);
+
+        // console.log(query, variables);
 
         try {
             const response = await axios({
