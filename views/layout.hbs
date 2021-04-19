@@ -4,26 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+    <link rel="stylesheet" href="/stylesheets/layout.css">
     <title>Anilog</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Main</a></li>
-            {{#unless currentUser}}
-            <li><a href="/signup">Sign up</a></li>
-            <li><a href="/login">Log in</a></li>
-            {{/unless}}
-            
-            {{#if currentUser}}
-            <li><a href="/logout">Log out</a></li>
-            {{/if}}
-        </ul>
-    </nav>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/scripts/api/mapper.js"></script>
-    <script src="/scripts/api/frontApiHandler.js"></script>
+  <nav>
+    <div class="logo">
+      <span>Anilog</span>
+    </div>
+    <div class="main-nav">
+      <a href="/">Browse</a>
+      {{!-- <a href="/search">Browse</a> --}}
+      {{#if currentUser}}
+        <a href="'/{{currentUser._id}}/lists">Lists</a>
+        <a href="'/{{currentUser._id}}/profile">Profile</a>
+        <a href="'/{{currentUser._id}}/friends">Friends</a>
+      {{/if}}
+    </div>
+      <div class="secondary-nav">
+        {{#unless currentUser}}
+          <a href="/login" class="ui button">Login</a>
+          <a href="/signup" class="ui primary button"><strong>Sign up</strong></a>
+        {{/unless}}
+        {{#if currentUser}}
+          <a href="/logout" class="logout">Logout</a>
+        {{/if}}
+      </div>
+  </nav>
         {{{body}}}
-
+  <footer>
+    <div class="footer-info">
+      <span>Powered by <a href="https://github.com/AniList/ApiV2-GraphQL-Docs">AniList API.</a></span>
+    </div>
+    <div class="footer-links">
+      <a href="/about" target="_blank">About us</a>
+      <a href="https://github.com/bit-sahti/project2-anilog" target="_blank">GitHub</a>
+    </div>
+  </footer>
+    
 </body>
+    
+
 </html>

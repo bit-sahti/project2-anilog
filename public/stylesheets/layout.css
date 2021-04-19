@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,400;0,600;0,700;0,900;1,100;1,400;1,600;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500&display=swap');
+
+/* Overall styles */
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-family: 'Overpass', 'Fira Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Navbar */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2B2D42;
+    color: #ffffff;
+    font-size: 1.6rem;
+    margin-bottom: 5rem;
+}
+
+nav div {
+    margin: 1.5rem 0;
+}
+
+.logo {
+    margin-left: 2rem;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #F4F1DE;
+}
+
+/* .main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+nav a {
+    margin: .3rem;
+    color: #F4F1DE;
+    font-weight: 600;
+    opacity: .9;
+}
+
+.secondary-nav {
+    margin-right: 2rem;
+}
+
+.ui.button {
+    font-size: 1.3rem;
+}
+
+.ui.button.primary {
+    background-color: #3675FB;
+    /* background-color: #3675FB; */
+}
+
+.logout {
+    font-size: 1.3rem;
+    opacity: .7;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    background-color: #11161D;
+    color: #F4F1DE;
+}
+
+footer div {
+    margin: 1rem 3rem;
+    font-weight: 600;
+}
+
+footer a {
+    color: #F4F1DE;
+}
+
+
+.footer-info {
+    opacity: .7;
+}
+
+.footer-info a {
+    font-weight: 900;
+    opacity: 1;
+}
+
+.footer-links a {
+    margin: 0 1.5rem;
+    opacity: .9;
+    font-weight: 800;
+    text-transform: uppercase;
+    /* font-size: 1.2rem; */
+}
