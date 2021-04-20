@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 /* Header */
 
 header {
@@ -16,40 +20,105 @@ h2 {
     text-align: right;
 }
 
-/* Sections */
-
-section {
-    width: 80%;
-    margin: 0 auto;
-    background-color: lightblue;
-}
-
-    /* Search area */
-
-.search {
-    margin-bottom: 3rem;
-}
-
-#search-results {
-    display: flex;
-    flex-wrap: wrap;
-    /* margin: 20px; */
-}
-
-.anime-card {
-    border: 1px solid antiquewhite;
-    width: 180px;
-    height: 230px;
-}
-
-#go {
-    margin: 10px  0;
-}
-
 .hidden {
     display: none;
 }
 
 .invisible {
     visibility: hidden;
+}
+
+/* Sections */
+
+section {
+    width: 90%;
+    margin: 0 auto 4rem;
+    /* background-color: #d6d4d4; */
+}
+
+    /* Search area */
+
+.fields {
+    font-size: 1.6rem;
+    align-items: center;
+}
+
+.params {
+    padding: 3.5rem;
+    border-radius: 2rem;
+    background-color:#E5EBF1;
+}
+
+.secondary.fields {
+    margin-top: -50rem;
+    font-size: .9rem;
+    font-weight: 700;
+    align-content: flex-start;
+    justify-content: flex-end;
+}
+
+.secondary.fields label {
+    margin: 0 1rem;
+}
+.secondary.fields button {
+    margin: 0 2rem;
+}
+
+.secondary.fields div {
+    display: flex;
+    align-content: center;
+}
+
+.perPage {
+    display: flex;
+}
+
+#perPage {
+    width: clamp(5rem, 6rem, 8rem);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 7rem;
+    padding-top: 4rem;
+    /* margin: 2rem; */
+}
+
+.pagination h3 {
+    font-size: 1.6rem;
+}
+
+/* Results area */
+
+#search-results {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Breaks the on smaller screens */
+
+.card {
+    align-self: center;
+}
+
+.card .image {
+    max-height: 25rem;
+    overflow: hidden;
+}
+
+
+
+
+.card .content {
+    padding-bottom: 20px;
+    height: 6rem;
+    overflow: hidden;
+}
+/* Breaks the on smaller screens */
+
+.no-results {
+    margin-left: 2rem;
+    font-size: 2.5rem;
 }
