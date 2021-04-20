@@ -129,9 +129,18 @@ class AniListHandler {
     }
 
     getMediaQuery(obj) {
-        const entries = Object.entries(obj).filter(( [ key, value ] ) => value.length).map(( [ key, value ] ) => key);
-        const entriesValues = Object.entries(obj).filter(( [ key, value ] ) => value.length).map(( [key, value] ) => value);
+        const validProps = Object.entries(obj)
+                                 .filter(( [ key, value ] ) => {
+                                     if (typeof value === 'string') return value.trim().length;
 
+                                     return value.length;
+                                 })
+
+        const entries = validProps.map(( [ key, value ] ) => key);
+
+        const entriesValues = validProps.map(( [key, value] ) => value);
+
+        console.log(entries, entriesValues);
         const queryParams = entries.map(entry => {
             switch(entry) {
                 case 'search':
