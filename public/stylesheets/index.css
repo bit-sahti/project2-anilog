@@ -49,3 +49,7 @@ section {
 .hidden {
     display: none;
 }
+
+.invisible {
+    visibility: hidden;
+}

@@ -17,11 +17,11 @@
                 <div class="primary params fields">
                     <div class="title field">
                         <label for="search">Search</label>
-                        <input type="name" name="search" id="search" {{#if query.search}} value="{{query.search}}"{{/if}}>
+                        <input type="name" name="search" id="search" {{#if query.search}} value="{{query.search}}"{{/if}} cla>
                     </div>
                     <div class="genres field">
                         <label for="genres">Genres</label>
-                        <select name="genre_in" id="genres" class="ui fluid search clearable selection dropdown" placeholder="Any" multiple>
+                        <select name="genre_in" id="genres" class="ui fluid search clearable selection dropdown" multiple>
                             <option value="">Any</option>
                             <option value="action" {{#if query.action}} selected {{/if}}>Action</option>
                             <option value="adventure"{{#if query.adventure}} selected {{/if}}>Adventure</option>
@@ -142,7 +142,6 @@
                             <option value="summer" {{#if query.summer}} selected {{/if}}>Summer</option>
                             <option value="fall" {{#if query.fall}} selected {{/if}}>Fall</option>
                         </select>
-
                     </div>
 
                     <div class="status field">
@@ -153,9 +152,7 @@
                             <option value="finished" {{#if query.finished}} selected {{/if}}>Finished</option>
                             <option value="not_yet_released" {{#if query.not_yet_released}} selected {{/if}}>To be released</option>
                             <option value="cancelled" {{#if query.cancelled}} selected {{/if}}>Cancelled</option>
-
                         </select>
-
                     </div>
 
                     <div class="format field">
@@ -178,19 +175,39 @@
 
                 <div class="advanced params"></div>
 
-                <div class="page params">
-                    <input class="hidden" type="number" name="page" id="page" {{#if query.page}} value={{query.page}} {{else}} value="1"{{/if}}>
-                    <input type="number" name="perPage" id="perPage" {{#if query.perPage}} value={{query.perPage}} {{else}} value="30"{{/if}}>
-                </div>
-                
-                
+                <div class="secondary params fields">
+                    <div class="sort field">
+                        <label for="sort">Sort by</label>
+                        <select name="sort" id="sort" class="ui clearable search selection dropdown">
+                            <option value="popularity_desc" selected>Most popular</option>
+                            <option value="score_desc" {{#if query.score_desc}} selected {{/if}}>Best average score</option>
+                            <option value="title_english" {{#if query.title_english}} selected {{/if}}>English title</option>
+                            <option value="title_romaji" {{#if query.title_romaji}} selected {{/if}}>Japanese title</option>
+                            <option value="start_date" {{#if query.start_date}} selected {{/if}}>Most recent</option>
+                            <option value="episodes" {{#if query.episodes}} selected {{/if}}>Number of episodes</option>
+                        </select>
+                    </div>
+                    <div class="page field">
+                        <input class="hidden" type="number" name="page" id="page" {{#if query.page}} value={{query.page}} {{else}} value="1"{{/if}}>                        
+                    </div>
+                    <div class="perPage field">
+                        <label for="perPage">Results per page:</label>
+                        <input type="number" name="perPage" id="perPage" {{#if query.perPage}} value={{query.perPage}} {{else}} value="30"{{/if}}>
+                    </div>
+                </div>                
 
                 
                 <br/>
-                <button type="submit" id="go">Go</button>  
-                    {{#if pageInfo.hasNextPage}}
-                        <button id="next">Next page</button>                  
-                    {{/if}}
+                <button type="submit" id="go">New search</button>
+
+                <div class="pagination">
+                    
+                    <button id="previous" {{#unless pageInfo.hasPreviousPage}} class="invisible" {{/unless}}>Previous page</button>
+                
+                    <h3>Page <span>{{pageInfo.currentPage}}</span> of <span>{{pageInfo.lastPage}}</span></h3>
+
+                    <button id="next" {{#unless pageInfo.hasNextPage}} class="invisible" {{/unless}}>Next page</button>
+                </div>
             </form>
         </section>
 
