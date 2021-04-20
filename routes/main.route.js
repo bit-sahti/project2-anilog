@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
         const queryParams = queryMapper.map(req.query);
         const media = await aniList.searchMedia(req.query)
 
-        // console.log(media);
+        console.log(media.pageInfo);
 
         req.session.currentUser ? res.render('index', { currentUser: req.session.currentUser, query: queryParams, pageInfo: media.pageInfo, animes: media.animes }) 
                                 : res.render('index', { query: queryParams, pageInfo: media.pageInfo, animes: media.animes })

@@ -94,6 +94,12 @@ class Mapper {
     formatBulkData(rawAnimes) {
         return rawAnimes.map(anime => this.formatData(anime))
     }
+
+    formatPageInfo(pageInfo) {
+        pageInfo.currentPage > 1 ? pageInfo.hasPreviousPage =  true : pageInfo.hasPreviousPage = false;
+
+        return pageInfo;
+    }
 }
 
 module.exports = new Mapper();

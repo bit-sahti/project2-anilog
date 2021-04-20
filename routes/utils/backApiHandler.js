@@ -9,7 +9,7 @@ class AniListHandler {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        this.mediaSearchParams = `type: ANIME`
+        this.mediaSearchParams = `type: ANIME, isAdult: false`
         this.mediaParams = `
                 id
                 isAdult
@@ -83,8 +83,9 @@ class AniListHandler {
         `,
         this.pageInfoParams = `
                 pageInfo {
-                    total
+                    perPage
                     currentPage
+                    lastPage
                     hasNextPage
                 }
         `
@@ -145,6 +146,8 @@ class AniListHandler {
                     return entry = `$status: MediaStatus`;
                 case 'format':
                     return entry = `$format: MediaFormat`;
+                case 'sort':
+                    return entry = `$sort: [MediaSort]`;
             }
         }).join(', ');
 
@@ -154,7 +157,7 @@ class AniListHandler {
         const variables = entries.reduce((acc, prop, i) => {
             acc[prop] = entriesValues[i];
 
-            if (prop === 'season' || prop === 'status' || prop === 'format') {
+            if (prop === 'season' || prop === 'status' || prop === 'format' || prop === 'sort') {
                 acc[prop] = acc[prop].toUpperCase()
             }
 
@@ -187,10 +190,8 @@ class AniListHandler {
         const query = this.getMediaQuery(params)[0]
         const variables = this.getMediaQuery(params)[1]
 
-        console.log(query);
+        // console.log(query);
         console.log(variables);
-
-        // console.log(query, variables);
 
         try {
             const response = await axios({
@@ -206,13 +207,10 @@ class AniListHandler {
                     variables                
                 }    
             })
-            
-            const animes = mapper.formatBulkData(response.data.data.Page.media)
-            console.log(response.data.data.Page.pageInfo);
 
             return {
-                pageInfo: response.data.data.Page.pageInfo,
-                animes: animes
+                pageInfo: mapper.formatPageInfo(response.data.data.Page.pageInfo),
+                animes: mapper.formatBulkData(response.data.data.Page.media)
             }
         }
     

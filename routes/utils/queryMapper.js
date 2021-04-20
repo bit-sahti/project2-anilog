@@ -38,6 +38,14 @@ class queryMapper {
         return { [queryFormat]: true };
     }
 
+    getSortingFactor(querySort) {
+        if (!querySort) return null;
+
+        console.log(querySort);
+
+        return { [querySort]: true };
+    }
+
     map(query) {
         const search = { search: query.search }
         const genres = this.getGenres(query.genre_in);
@@ -45,10 +53,15 @@ class queryMapper {
         const season = this.getSeason(query.season);
         const status = this.getStatus(query.status);
         const format = this.getFormat(query.format);
+        const sort = this.getSortingFactor(query.sort);
+        const page = { page: query.page }
+        const perPage = { perPage: query.perPage }
 
-        return Object.assign({}, search, genres, year, season, status, format)
+        const formattedQuery = Object.assign({}, search, genres, year, season, status, format, sort, page, perPage)
 
-        console.log(formattedQuery);
+        console.log('formated query ===>', formattedQuery);
+
+        return formattedQuery
     }
 }
 
