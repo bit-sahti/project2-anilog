@@ -1,40 +1,125 @@
-<h1></h1>
+<link rel="stylesheet" href="/stylesheets/anime.css">
 
+<header class="banner" style="background-image: url({{anime.bannerImage}})">
+</header>
 
-<h1>{{anime.title.romaji}}</h1>
+<main>
+    <div class="">
+        <div class="cover" style="background-image: url({{anime.coverImage.large}})">
+        </div>
 
-{{#if anime.title.english}}
-    
-<span>{{anime.title.english}}</span>
+        <div class="list-activity">
+            {{#if currentUser}}
+                <ul>
+                    {{#if onToWatchList}}
+                    <li><a href="/anime/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Remove from to watch list</a></li>
+                    {{else}}
+                    <li><a href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Add to watch list</a></li>
+                    {{/if}}
 
-{{/if}}
+                    {{#if onWatchingList}}
+                    <li><a href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a></li>
+                    {{else}}
+                    <li><a href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Add to watching list</a></li>
+                    {{/if}}
 
-{{#if currentUser}}
-    <ul>
-        {{#if onToWatchList}}
-        <li><a href="/anime/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Remove from to watch list</a></li>
-        {{else}}
-        <li><a href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">Add to watch list</a></li>
-        {{/if}}
+                    {{#if onWatchedList}}
+                    <li><a href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a></li>
+                    {{else}}
+                    <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Add to watched list</a></li>
+                    {{/if}}
 
-        {{#if onWatchingList}}
-        <li><a href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a></li>
-        {{else}}
-        <li><a href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Add to watching list</a></li>
-        {{/if}}
+                    {{#if onFavoritesList}}
+                    <li><a href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a></li>
+                    {{else}}
+                    <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Add to favorites list</a></li>
+                    {{/if}}
+                    
+                </ul>
+            {{/if}}
+        </div>
 
-        {{#if onWatchedList}}
-        <li><a href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a></li>
-        {{else}}
-        <li><a href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Add to watched list</a></li>
-        {{/if}}
+        <div class="details">
+            <div class="detail">
+                <h6>Format</h6>
+                <p>{{anime.format}}</p>
+            </div>
+            <div class="detail">
+                <h6>Episodes</h6>
+                <p>{{anime.episodes}}</p>
+            </div>
+            <div class="detail">
+                <h6>Episodes duration</h6>
+                <p>{{anime.duration}}</p>
+            </div>
+            <div class="detail">
+                <h6>Status</h6>
+                <p>{{anime.status}}</p>
+            </div>
+            <div class="detail">
+                <h6>Start date</h6>
+                <p>{{anime.startDate.month}} {{anime.startDate.day}}, {{anime.startDate.year}}</p>
+            </div>
+            <div class="detail">
+                <h6>End date</h6>
+                <p>{{anime.endDate.month}} {{anime.endDate.day}}, {{anime.endDate.year}}</p>
+            </div>
+            <div class="detail">
+                <h6>Season</h6>
+                <p>{{anime.season}}</p>
+            </div>
+            <div class="detail">
+                <h6>Average Score</h6>
+                <p></p>
+            </div>
+            <div class="detail">
+                <h6>Romaji</h6>
+                <p>{{anime.title.romaji}}</p>
+            </div>
+            <div class="detail">
+                <h6>Native</h6>
+                <p>{{anime.title.native}}</p>
+            </div>
+            <div class="detail">
+                <h6>Synonyms</h6>
+                {{#if anime.synonyms}}
+                    {{#each anime.synonyms}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                {{else}}
+                    <p>None</p>
+                {{/if}}
+            </div>
 
-        {{#if onFavoritesList}}
-        <li><a href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a></li>
-        {{else}}
-        <li><a href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Add to favorites list</a></li>
-        {{/if}}
-        
-    </ul>
-    <p>{{currentUser.username}}</p>
-{{/if}}
+        </div>
+
+        <div class="description">
+            <div class="text">
+                <h1>{{anime.title.english}}</h1>
+                <span>{{anime.source}}</span>
+                <span>{{anime.creation}}</span>
+                <span>{{anime.direction}}</span>
+                <span>{{anime.studio}}</span>
+                <p>{{anime.description}}</p>
+            </div>
+            <div class="genres">
+                {{#each anime.genres}}
+                    <span>{{this}}</span>
+                {{/each}}
+            </div>
+            <div class="tags">
+                <div class="general">
+                    {{#each anime.generalTags}}
+                        <span>{{this}}</span>
+                    {{/each}}
+                </div>
+                <div class="spoiler">
+                    {{#each anime.spoilerTags}}
+                        <span>{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
