@@ -4,6 +4,12 @@
 
 /* Overall styles */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     font-size: 10px;
 }
@@ -12,19 +18,27 @@ body {
     font-family: 'Overpass', 'Fira Sans', sans-serif;
     display: flex;
     flex-direction: column;
+    background-color: #E5EBF1;
+    height: 100%;
 
 }
 
 /* Navbar */
 
 nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
     align-items: center;
     justify-content: space-between;
     background-color: #2B2D42;
     color: #ffffff;
     font-size: 1.6rem;
     margin-bottom: 3rem;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
 }
 
 nav div {
@@ -53,6 +67,8 @@ nav a {
 
 .secondary-nav {
     margin-right: 2rem;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .ui.button {
