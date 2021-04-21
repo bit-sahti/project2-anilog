@@ -4,9 +4,9 @@ class Mapper {
 
         switch(trailer.site) {
             case 'youtube':
-                return `https://www.youtube.com/watch?v=${trailer.id}`;
+                return `https://www.youtube.com/embed/${trailer.id}`;
             case 'dailymotion':
-                return `https://www.dailymotion.com/video/${trailer.id}`
+                return `https://www.dailymotion.com/embed/video/${trailer.id}?autoplay=1`
         }
     }
 
@@ -84,6 +84,7 @@ class Mapper {
                 status: anime.status,
                 startDate: anime.startDate,
                 endDate: anime.endDate,
+                season: anime.season,
                 source: anime.source,
                 creation: this.getStaff(1, 'Original', anime.staff.edges),
                 direction: this.getStaff(2, 'Director', anime.staff.edges),
