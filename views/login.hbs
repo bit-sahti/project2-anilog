@@ -1,13 +1,31 @@
-<form action="/login" method="POST">
-    <label for="email">Registered email</label>
-    <input type="email" name="email" id="email">
-    <br>
-    {{#if authError}}
-      <span class="warning">{{authError}}</span>
-    {{/if}}
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password">
+<link rel="stylesheet" href="stylesheets/login.css">
 
-    <button type="submit">Log in</button>
-</form>
+<section>
+  <div>
+    <h1>Login</h1>
+  </div>
+  <form action="/login" method="POST" class="ui massive form error">
+    <div class="field">
+      <input type="email" name="email" placeholder="Email">
+    </div>
+
+    <div class="field">
+      <input type="password" name="password" placeholder="Password">
+    </div>
+
+    {{#if authError}}
+      <div class="ui error message">
+          <div class="header">{{authError}}</div>
+      </div>
+    {{/if}}
+
+    <div class="btn field">
+      <button class="ui blue button">Sign in</button>
+    </div>
+  </form>
+
+  <div>
+    <a href="/reset">Forgot your password?</a>
+  </div>
+  
+</section>
