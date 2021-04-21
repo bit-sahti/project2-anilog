@@ -43,6 +43,7 @@ const Anime = model('Anime', new Schema({
         month: Number,
         day: Number
     },
+    season: String,
     //Staff info
     source: String,
     creation: [String],
