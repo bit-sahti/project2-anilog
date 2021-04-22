@@ -23,6 +23,14 @@ body {
 
 }
 
+.hidden {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
 /* Navbar */
 
 nav {
@@ -33,7 +41,6 @@ nav {
     background-color: #2B2D42;
     color: #ffffff;
     font-size: 1.6rem;
-    margin-bottom: 3rem;
 }
 
 .main-nav {
@@ -53,11 +60,6 @@ nav div {
     color: #F4F1DE;
 }
 
-/* .main-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 nav a {
     margin: .3rem;
     color: #F4F1DE;

@@ -20,14 +20,6 @@ h2 {
     text-align: right;
 }
 
-.hidden {
-    display: none;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
 /* Sections */
 
 section {
@@ -46,7 +38,7 @@ section {
 .params {
     padding: 3.5rem;
     border-radius: 2rem;
-    background-color:#E5EBF1;
+    background-color:#fff;
 }
 
 .secondary.fields {
@@ -99,22 +91,26 @@ section {
 
 /* Breaks the on smaller screens */
 
-.card {
+.ui.card {
+    height: 31rem;
     align-self: center;
+    border-radius: 15px;
+    /* background-color: #E5EBF1; */
 }
 
 .card .image {
-    max-height: 25rem;
+    height: 80%;
     overflow: hidden;
 }
 
-
-
-
 .card .content {
     padding-bottom: 20px;
-    height: 6rem;
+    height: 20%;
     overflow: hidden;
+}
+
+.card .content:hover {
+    overflow: visible;
 }
 /* Breaks the on smaller screens */
 
