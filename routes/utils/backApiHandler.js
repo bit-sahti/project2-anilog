@@ -36,7 +36,7 @@ class AniListHandler {
                     color
                 }
                 bannerImage
-                description
+                description(asHtml: true)
                 trailer {
                     id
                     site
