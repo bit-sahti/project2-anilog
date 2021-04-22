@@ -1,5 +1,7 @@
+/* Navbar */
+
 .transparent {
-    position: fixed;
+    position: absolute;
     z-index: 10;
     width: 100%;
     background: hsla(235, 21%, 21%, 0.356);
@@ -11,6 +13,8 @@
     opacity: 1;
 }
 
+/* Banner */
+
 header {
     position: relative;
     background-size: cover;
@@ -21,19 +25,14 @@ header {
 
 main {
     margin: 0;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .no-banner {
     margin-top: 8rem;
 }
 
-.cover {
-    margin: 0 auto;
-    flex-shrink: 0;
-    width: 100%;
-    height: 300px;
-}
+/* Upper part (Main info) */
 
 .main-info {    
     background-color: white;
@@ -61,6 +60,16 @@ main {
     min-height: 240px;
 }
 
+
+    /* Cover */
+
+.cover {
+    margin: 0 auto;
+    flex-shrink: 0;
+    width: 100%;
+    height: 300px;
+}
+
 .overlap {
     position: relative;
     margin-top: -125px;
@@ -70,6 +79,8 @@ main {
 .no-overlap {
     margin: 3rem 0;
 }
+
+    /* List Activity */
 
 #list-activity {
     margin-top: 1rem;
@@ -86,12 +97,19 @@ main {
     color: red;
 } */
 
+    /* Description */
+
 .description {
     display: flex;
     align-items: center;
 }
 
-.description .header {
+.text {
+    min-width: 600px;
+    /* max-width: 850px; */
+}
+
+.text .header {
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -112,11 +130,7 @@ main {
     margin-top: 1.5rem; /* change this to whatever height you want it */
 }
 
-
-
-/* .details,
-.tags,
-.media */
+/* Bottom part (aditional info) */
 
 .aditional-info .container > div {
     margin-bottom: 2rem;
@@ -124,6 +138,8 @@ main {
     border-radius: 5px;
     background-color: white;
 }
+
+    /* Details */
 
 .details h6 {
     margin: 0;
@@ -134,13 +150,11 @@ main {
     font-size: 1.1rem;
 }
 
-/* .tags > div {
-    margin-bottom: 2rem;
+.synonyms span {
+    display: inline-block;
+    margin-bottom: .5rem;
 }
-
-.tags > div:last-child {
-    margin-bottom: 0;
-} */
+    /* Tags */
 
 .tags span.ui.button {
     margin-bottom: 1rem;
@@ -148,4 +162,14 @@ main {
 
 .ui.ui.ui.ui.small.button{
     font-size: 1.1rem;
+}
+
+    /* Creative staff  */
+.creation.ui.cards .meta,
+.creation.ui.cards .header {
+    margin-bottom: 1rem;
+}
+
+.creation.ui.cards .card {
+    border-radius: 5px;
 }

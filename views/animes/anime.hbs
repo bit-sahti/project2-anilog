@@ -126,14 +126,16 @@
                     <span>{{anime.title.native}}</span>
                 </div>
                 <div class="detail">
-                    <h6>Synonyms</h6>
-                    {{#if anime.synonyms}}
+                    <h6>Source</h6>
+                    <span>{{anime.source}}</span>
+                </div>
+                {{#if anime.synonyms}}
+                    <div class="detail synonyms">
+                        <h6>Synonyms</h6>
                         {{#each anime.synonyms}}
                             <span>{{this}}</span>
                         {{/each}}
-                    {{else}}
-                        <span>None</span>
-                    {{/if}}
+                {{/if}}
                 </div>
             </div>
 
@@ -148,8 +150,8 @@
                     {{/each}}
                 </div>
                 {{#if anime.spoilerTags}}
-                <button class="ui small red basic button">Show spoiler tropes</button>
-                    <div class="spoiler hidden">
+                    <button class="ui small red basic button" id="show-spoilers">Show spoiler tropes</button>
+                    <div class="spoilerTags hidden">
                         {{#each anime.spoilerTags}}
                             <span class="ui small red button">{{this}}</span>
                         {{/each}}
@@ -157,27 +159,59 @@
                 {{/if}}
             </div>
 
-            <div class="media">
-                {{#if anime.trailer}}
+            {{#if anime.trailer}}
+                <div class="media">
                     <div class="trailer">
                         <h2>Trailer</h2>
                             <iframe width="420" height="315"
                                 src="{{anime.trailer}}" allowfullscreen> 
                             </iframe>                    
                     </div>
-                {{/if}}
-
-            </div>
+                </div>
+            {{/if}}
 
         </div>
 
-        <div class="container">
-            <div class="creation">
-                <h6>Source: <span>{{anime.source}}</span></h6>
-                <h6>Creation: {{#each anime.creation}} <span>{{this}}</span> {{/each}}</h6>
-                <h6>Direction: {{#each anime.direction}} <span>{{this}}</span> {{/each}}</h6>
-                <h6>Studio:  <span>{{anime.studio}}</span></h6>
+        <div class="relations">
+            <div class="creation ui cards">
+                {{#if anime.creation}}
+                    <div class="card">
+                        <div class="content">
+                            <div class="meta">Creation</div>
+                            {{#each anime.creation}}
+                                <div class="header">{{this}}</div>
+                            {{/each}}    
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anime.direction}}
+                    <div class="card">
+                        <div class="content">
+                            <div class="meta">Direction</div>
+                            {{#each anime.direction}}
+                                <div class="header">{{this}}</div>
+                            {{/each}}    
+                        </div>
+                    </div>
+
+                {{/if}}
+                
+                <div class="card">
+                    <div class="content">
+                        <div class="meta">Studio</div>
+                            <div class="header">{{anime.studio}}</div>
+                    </div>
+                </div>
             </div>
+
+            <div class="related-media">
+
+            </div>
+
+
+
+
         </div>
     </section>
 </main>
@@ -186,9 +220,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
-
-    <script>
-        $('.ui.dropdown')
-        .dropdown()
-        ;
-    </script>
+    <script src="/scripts/anime/details.js"></script>
