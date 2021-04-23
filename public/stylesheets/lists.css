@@ -1,0 +1,36 @@
+main {
+    margin: 4rem auto;
+    padding: 1rem 2rem;
+    width: 85%;
+    background-color: #fff;
+    /* border: 3px solid red; */
+}
+
+.header {
+    margin-bottom: 4rem;
+}
+
+section {
+    padding: 2rem;
+}
+
+
+.ui.card .image {
+    height: 200px;
+    background-size: cover;
+}
+
+.ui.card .content {
+    font-size: 1.2rem;
+    height: 5rem;
+    overflow: hidden;
+}
+
+.ui.card .extra.content {
+    overflow: visible;
+}
+
+.ui.two.buttons {
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

@@ -1,0 +1,214 @@
+<link rel="stylesheet" href="/stylesheets/lists.css">
+
+<main>
+    <div class="header">
+        <h1>Anime catalogue <span>from <a href="/{{listsOwner._id}}/profile">{{listsOwner.username}}</a></span></h1>
+    </div>
+    <section class="list">
+        <h2>Watching</h2>
+        <div class="animes">
+            {{#if lists.watching}}
+                <div class="ui stackable grid container">
+                    {{#each lists.watching}}
+                        <div class="ui three wide column">
+                            <div class="ui stackable fluid card">
+                                <div class="image" style="background-image: url({{this.coverImage.extraLarge}});">
+                                </div>
+                                <div class="content">
+                                    {{#if this.title.english}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.english}}</a>
+                                    {{else}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.romaji}}</a>
+                                    {{/if}}
+                                </div>
+                                {{#if ../isCurrentUser}}
+                                    <div class="extra content">
+                                        <div class="ui two bottom attached buttons">
+                                            <div class="ui teal buttons">
+                                                <div class="ui button">
+                                                    Edit
+                                                </div>
+                                                <div class="ui dropdown icon button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=watching&currentAnimeList=beingWatchedBy&targetUserList=watched&targetAnimeList=watchedBy&id={{this.externalId}}">Set as finished</a>
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=watching&currentAnimeList=beingWatchedBy&targetUserList=favorites&targetAnimeList=favoriteOf&id={{this.externalId}}">Set as favorite</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui red buttons">
+                                                <a class="item" href="/{{../listsOwner._id}}/lists/remove?userList=watching&animeList=beingWatchedBy&id={{this.externalId}}">
+                                                    <div class="ui red button">Remove</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <h3>List currently empty.</h3>
+            {{/if}}
+        </div>
+    </section>
+
+    <section class="list">
+        <h2>Planning</h2>
+        <div class="animes">
+            {{#if lists.toWatch}}
+                <div class="ui stackable grid container">
+                    {{#each lists.toWatch}}
+                        <div class="ui three wide column">
+                            <div class="ui stackable fluid card">
+                                <div class="image" style="background-image: url({{this.coverImage.extraLarge}});">
+                                </div>
+                                <div class="content">
+                                    {{#if this.title.english}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.english}}</a>
+                                    {{else}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.romaji}}</a>
+                                    {{/if}}
+                                </div>
+                                {{#if ../isCurrentUser}}
+                                    <div class="extra content">
+                                        <div class="ui two bottom attached buttons">
+                                            <div class="ui teal buttons">
+                                                <div class="ui button">
+                                                    Edit
+                                                </div>
+                                                <div class="ui dropdown icon button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=toWatch&currentAnimeList=toBeWatchedBy&targetUserList=watching&targetAnimeList=beingWatchedBy&id={{this.externalId}}">Set as watching</a>
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=toWatch&currentAnimeList=toBeWatchedBy&targetUserList=watched&targetAnimeList=watchedBy&id={{this.externalId}}">Set as finished</a>
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=toWatch&currentAnimeList=toBeWatchedBy&targetUserList=favorites&targetAnimeList=favoriteOf&id={{this.externalId}}">Set as favorite</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui red buttons">
+                                                <a class="item" href="/{{../listsOwner._id}}/lists/remove?userList=toWatch&animeList=toBeWatchedBy&id={{this.externalId}}">
+                                                    <div class="ui red button">Remove</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <h3>List currently empty.</h3>
+            {{/if}}
+        </div>
+    </section>
+
+    <section class="list">
+        <h2>Favorites</h2>
+        <div class="animes">
+            {{#if lists.favorites}}
+                <div class="ui stackable grid container">
+                    {{#each lists.favorites}}
+                        <div class="ui three wide column">
+                            <div class="ui stackable fluid card">
+                                <div class="image" style="background-image: url({{this.coverImage.extraLarge}});">
+                                </div>
+                                <div class="content">
+                                    {{#if this.title.english}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.english}}</a>
+                                    {{else}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.romaji}}</a>
+                                    {{/if}}
+                                </div>
+                                {{#if ../isCurrentUser}}
+                                    <div class="extra content">
+                                        <div class="ui two bottom attached buttons">
+                                            <div class="ui teal buttons">
+                                                <div class="ui button">
+                                                    Edit
+                                                </div>
+                                                <div class="ui dropdown icon button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=favorites&currentAnimeList=favoriteOf&targetUserList=watched&targetAnimeList=watchedBy&id={{this.externalId}}">Set as finished</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui red buttons">
+                                                <a class="item" href="/{{../listsOwner._id}}/lists/remove?userList=favorites&animeList=favoriteOf&id={{this.externalId}}">
+                                                    <div class="ui red button">Remove</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <h3>List currently empty.</h3>
+            {{/if}}
+        </div>
+    </section>
+
+    <section class="list">
+        <h2>Finished</h2>
+        <div class="anime">
+           {{#if lists.watched}}
+                <div class="ui stackable grid container">
+                    {{#each lists.watched}}
+                        <div class="ui three wide column">
+                            <div class="ui stackable fluid card">
+                                <div class="image" style="background-image: url({{this.coverImage.extraLarge}});">
+                                </div>
+                                <div class="content">
+                                    {{#if this.title.english}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.english}}</a>
+                                    {{else}}
+                                        <a href="/anime?id={{this.externalId}}">{{this.title.romaji}}</a>
+                                    {{/if}}
+                                </div>
+                                {{#if ../isCurrentUser}}
+                                    <div class="extra content">
+                                        <div class="ui two bottom attached buttons">
+                                            <div class="ui teal buttons">
+                                                <div class="ui button">
+                                                    Edit
+                                                </div>
+                                                <div class="ui dropdown icon button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=watched&currentAnimeList=beingWatchedBy&targetUserList=watching&targetAnimeList=beingWatchedBy&id={{this.externalId}}">Set as watching</a>
+                                                        <a class="item" href="/{{../listsOwner._id}}/lists/edit?currentUserList=watched&currentAnimeList=beingWatchedBy&targetUserList=favorites&targetAnimeList=favoriteOf&id={{this.externalId}}">Set as favorite</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui red buttons">
+                                                <a class="item" href="/{{../listsOwner._id}}/lists/remove?userList=watched&animeList=watchedBy&id={{this.externalId}}">
+                                                    <div class="ui red button">Remove</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <h3>List currently empty.</h3>
+            {{/if}}
+        </div>
+
+    </section>    
+    
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+<script src="/scripts/user/lists.js"></script>
