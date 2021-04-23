@@ -22,10 +22,12 @@ const User = model('User', new Schema({
         isPublic: { type: Boolean, default: false }
     },
     //Lists
-    favorites: [ { type: Types.ObjectId, ref: 'Anime' } ],
-    watching: [ { type: Types.ObjectId, ref: 'Anime' } ],
-    watched: [ { type: Types.ObjectId, ref: 'Anime' } ],
-    toWatch: [ { type: Types.ObjectId, ref: 'Anime' } ],
+    lists: {
+        favorites: [ { type: Types.ObjectId, ref: 'Anime' } ],
+        watching: [ { type: Types.ObjectId, ref: 'Anime' } ],
+        watched: [ { type: Types.ObjectId, ref: 'Anime' } ],
+        toWatch: [ { type: Types.ObjectId, ref: 'Anime' } ]
+    },
     //Social
     friendshipRequests: [ { type: Types.ObjectId, ref: 'User' } ],
     friends: [ { type: Types.ObjectId, ref: 'User' } ],

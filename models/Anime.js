@@ -50,10 +50,12 @@ const Anime = model('Anime', new Schema({
     direction: [String],
     studio: String,
     //Site related activity
-    favoriteOf: [{ type: Types.ObjectId, ref: 'User'}],
-    beingWatchedBy: [{ type: Types.ObjectId, ref: 'User'}],
-    watchedBy: [{ type: Types.ObjectId, ref: 'User'}],
-    toBeWatchedBy: [{ type: Types.ObjectId, ref: 'User'}]
+    userActivity: {
+        favoriteOf: [{ type: Types.ObjectId, ref: 'User'}],
+        beingWatchedBy: [{ type: Types.ObjectId, ref: 'User'}],
+        watchedBy: [{ type: Types.ObjectId, ref: 'User'}],
+        toBeWatchedBy: [{ type: Types.ObjectId, ref: 'User'}]
+    }
 }))
 
 module.exports = Anime;
