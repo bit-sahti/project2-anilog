@@ -21,32 +21,32 @@
                                 {{#if currentUser}}
 
                                     {{#if onToWatchList}}
-                                        <a class="item" href="/anime/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">
-                                            Remove from to watch list</a>
+                                        <a class="item" href="/{{currentUser}}/lists/remove?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">
+                                            Remove from Planning List</a>
                                     {{else}}
-                                        <a class="item" href="/anime/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">
-                                            Add to watch list
+                                        <a class="item" href="/{{currentUser}}/lists/add?userList=toWatch&animeList=toBeWatchedBy&id={{anime.externalId}}">
+                                            Add to Planning List
                                         </a>
                                     {{/if}}
                                     
                     
                                     {{#if onWatchingList}}
-                                    <a class="item" href="/anime/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from watching list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/remove?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Remove from Watching list</a>
                                     {{else}}
-                                    <a class="item" href="/anime/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Add to watching list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/add?userList=watching&animeList=beingWatchedBy&id={{anime.externalId}}">Add to Watching list</a>
                                     {{/if}}
                                     
                                     {{#if onWatchedList}}
-                                    <a class="item" href="/anime/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from watched list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/remove?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Remove from Watched List</a>
                                     {{else}}
-                                    <a class="item" href="/anime/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Add to watched list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/add?userList=watched&animeList=watchedBy&id={{anime.externalId}}">Add to Watched List</a>
                                     {{/if}}
                                     
                                     
                                     {{#if onFavoritesList}}
-                                    <a class="item" href="/anime/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from favorites list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/remove?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Remove from Favorites List</a>
                                     {{else}}
-                                    <a class="item" href="/anime/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Add to favorites list</a>
+                                    <a class="item" href="/{{currentUser}}/lists/add?userList=favorites&animeList=favoriteOf&id={{anime.externalId}}">Add to Favorites List</a>
                                     {{/if}}
 
                                 {{else}}
@@ -142,22 +142,25 @@
         </div>
 
         <div class="container">
-            <div class="tags">
-                <h2>Tropes</h2>
-                <div class="general">
-                    {{#each anime.generalTags}}
-                        <span class="ui small blue button">{{this}}</span>
-                    {{/each}}
-                </div>
-                {{#if anime.spoilerTags}}
-                    <button class="ui small red basic button" id="show-spoilers">Show spoiler tropes</button>
-                    <div class="spoilerTags hidden">
-                        {{#each anime.spoilerTags}}
-                            <span class="ui small red button">{{this}}</span>
+            {{#if anime.tags}}
+                <div class="tags">
+                    <h2>Tropes</h2>
+                    <div class="general">
+                        {{#each anime.generalTags}}
+                            <span class="ui small blue button">{{this}}</span>
                         {{/each}}
                     </div>
-                {{/if}}
-            </div>
+                    {{#if anime.spoilerTags}}
+                        <button class="ui small red basic button" id="show-spoilers">Show spoiler tropes</button>
+                        <div class="spoilerTags hidden">
+                            {{#each anime.spoilerTags}}
+                                <span class="ui small red button">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                </div>
+
+            {{/if}}
 
             {{#if anime.trailer}}
                 <div class="media">
