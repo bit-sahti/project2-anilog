@@ -17,9 +17,9 @@
       <a href="/">Browse</a>
       {{!-- <a href="/search">Browse</a> --}}
       {{#if currentUser}}
-        <a href="'/{{currentUser._id}}/lists">Lists</a>
-        <a href="'/{{currentUser._id}}/profile">Profile</a>
-        <a href="'/{{currentUser._id}}/friends">Friends</a>
+        <a href="/{{currentUser}}/lists">Lists</a>
+        <a href="/{{currentUser}}/profile">Profile</a>
+        <a href="/{{currentUser}}/friends">Friends</a>
       {{/if}}
     </div>
       <div class="secondary-nav">

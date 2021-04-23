@@ -56,13 +56,12 @@ router.post('/login', async (req, res, next) => {
         const userFromDb = await User.findOne({ email })
 
         if (!userFromDb) res.redirect('/signup');
-        console.log(decrypt(password, userFromDb.password));
 
         if (!decrypt(password, userFromDb.password)) {
             return res.render('login', { authError: 'Email ou senha incorretos' })
         }
         
-        req.session.currentUser = userFromDb;
+        req.session.currentUser = userFromDb._id;
 
         console.log(req.session.currentUser);
 
