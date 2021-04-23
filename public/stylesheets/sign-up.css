@@ -1,0 +1,21 @@
+main {
+    margin: 4rem auto;
+    padding: 2rem 4rem;
+    width: 50rem;    
+    background-color: #fff;
+    border-radius: 2rem;
+}
+
+h1:last-child {
+    color: #2B3762;
+    margin-bottom: 2rem;
+}
+
+.btn.field {
+    display: flex;
+    justify-content: center;
+}
+
+.ui.button {
+    font-size: 1.5rem;
+}

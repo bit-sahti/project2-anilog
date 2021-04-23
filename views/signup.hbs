@@ -1,35 +1,67 @@
-<h1>Create an account</h1>
+<link rel="stylesheet" href="stylesheets/sign-up.css">
+<main>
+    <form action="/signup" method="POST" class="ui big form error">
+        <div>
+            <h1>Create an account</h1>
+        </div>
 
-<form action="/signup" method="POST">
-    <div>
-        <label for="username">Choose an username</label>
-        <input id="username" type="text" name="username">
-    </div>
-    <div>
-        <label for="email">Type your email</label>
-        <input id="email" type="email" name="email">
-    </div>
-    <div>
-        <label for="birthDate">Inform your birth date</label>
-        <input id="birthDate" type="date" name="birthDate">
-    </div>
-    <div>
-        <label for="password">Create a password</label>
-        <input id="password" type="password" name="password" placeholder="At least 6 characters long">
-    </div>
-    <div>
-        <label for="passConfirmation">Confirm your password</label>
-        <input id="passConfirmation" type="password" name="passConfirmation" placeholder="At least 6 characters long">
-    </div>
-    <div>
-        <label for="resetPassQuestion">Choose a question to verify your identity in case you forget your password</label>
-        <input id="resetPassQuestion" type="text" name="resetPassQuestion">
-    </div>
-    <div>
-        <label for="resetPassAnswer">Write the correct answer.</label>
-        <input id="resetPassAnswer" type="password" name="resetPassAnswer">
-    </div>
-    
-    <br>
-    <button type="submit">Create account</button>
-</form>
+        <div class="field">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" {{#if fields.username}} value="{{fields.username}}" {{/if}}>
+            {{#if nameTaken}}
+                <div class="ui error message" id="usernameError">                    
+                    <p>Username unavailable. Please choose another one.</p>
+                </div>
+
+            {{/if}}
+        </div>
+
+        <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" {{#if fields.email}} value="{{fields.email}}" {{/if}}>
+            {{#if userExists}}
+                <div class="ui error message" id="emailError">                    
+                    <p>This email is already registered. Please proceed to <a href="/login">log in.</a></p>
+                </div>
+
+            {{/if}}
+        </div>
+
+        <div class="field">
+            <label for="birthDate">Birth date</label>
+            <input id="birthDate" type="date" name="birthDate" {{#if fields.birthDate}} value="{{fields.birthDate}}" {{/if}}>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="At least 10 characters long" {{#if fields.birthDate}} value="{{fields.birthDate}}" {{/if}}>
+        </div>
+
+        <div class="field">
+            <label for="passConfirmation">Confirm your password</label>
+            <input id="passConfirmation" type="password" name="passConfirmation" placeholder="At least 10 characters long" {{#if fields.password}} value="{{fields.password}}" {{/if}}>
+        </div>
+
+        <div class="field">
+            <label for="resetPassQuestion">Password reset question.</label>
+            <input id="resetPassQuestion" type="text" name="resetPassQuestion" placeholder="Something only you know" {{#if fields.resetPassQuestion}} value="{{fields.resetPassQuestion}}" {{/if}}>
+        </div>
+
+        <div class="field">
+            <label for="resetPassAnswer">Password reset answer</label>
+            <input id="resetPassAnswer" type="password" name="resetPassAnswer" {{#if fields.resetPassAnswer}} value="{{fields.resetPassAnswer}}" {{/if}}>
+        </div>
+       
+        <div class="btn field">
+            <button class="ui blue button" id="submit-btn">Create an account</button>
+        </div>
+
+    </form>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+<script src="/scripts/sign-up.js"></script>

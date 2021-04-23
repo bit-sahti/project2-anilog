@@ -23,6 +23,8 @@ router.post('/signup', async (req, res, next) => {
     
     const { username, email, birthDate, password, resetPassQuestion, resetPassAnswer } = req.body
 
+    console.log(birthDate);
+
     console.log(typeof birthDate);
 
     const newUser = {
@@ -35,9 +37,22 @@ router.post('/signup', async (req, res, next) => {
     }
 
     try {
-        User.create(newUser)
+        const userExists = await User.findOne({ email: email }) ? true : false
+        const nameTaken = await User.findOne({ username }) ? true : false
+
+        if (userExists || nameTaken) {
+            // console.log(userFromDb, nameTaken)
+            return res.render('signup', { fields: req.body, userExists, nameTaken })
+        }
+
+
+        const currentUser = await User.create(newUser);
+
+        console.log(currentUser);
+
+        req.session.currentUser = currentUser._id;
         
-        res.redirect('/login')
+        res.redirect(`/${currentUser._id}/profile`)
     }
 
     catch(err) {
