@@ -37,6 +37,17 @@ router.get('/:userId/lists', async (req, res, next) => {
 
 })
 
+router.use('/:userId', (req, res, next) => {
+    const { currentUser } = req.session;
+    const { userId } = req.params;
+
+    if (!currentUser) return res.redirect('/login');
+
+    if (currentUser !== userId) return res.send('Permission denied.')
+
+    next();
+})
+
 router.get('/:userId/lists/add', async (req, res, next) => {
     const userId = req.session.currentUser;
     const { id: animeId, userList, animeList } = req.query;
