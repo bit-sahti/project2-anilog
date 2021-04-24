@@ -14,13 +14,15 @@ const decrypt = (password, hash) => {
 }
 
 router.get('/signup', (req, res, next) => {
+    const { currentUser } = req.session;
+
+    if (currentUser) return res.render('signup', { currentUser })
+
     res.render('signup')
-})
+});
 
 router.post('/signup', async (req, res, next) => {
-    
     const { username, email, birthDate, password, resetPassQuestion, resetPassAnswer } = req.body;
-
     const newUser = {
         username,
         email,
@@ -46,13 +48,16 @@ router.post('/signup', async (req, res, next) => {
     }
 
     catch(err) {
-        console.log(err);
+        next(err);
     }
 })
 
 router.get('/login', (req, res, next) => {
+    const { currentUser } = req.session;
+
+    if (currentUser) return res.render('login', { currentUser })
     res.render('login')
-})
+});
 
 router.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
@@ -72,13 +77,11 @@ router.post('/login', async (req, res, next) => {
     }
 
     catch(err) {
-        console.log(err);
+        next(err);
     }
 })
 
-router.get('/reset', (req, res, next) => {
-    res.render('./errors/building')
-})
+router.get('/reset', (req, res, next) => res.render('./errors/building'))
 
 router.get('/logout', (req, res, next) => {
     req.session.destroy();
