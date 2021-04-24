@@ -4,13 +4,9 @@ const User = require('../models/User');
 const aniList = require('./utils/backApiHandler');
 const queryMapper = require('./utils/queryMapper')
 
-router.get('/', async (req, res, next) => {
-    console.log('Get request on root completed');
-    
+router.get('/', async (req, res, next) => {    
     try {
         if (!Object.keys(req.query).length) {
-            console.log('no query ====>', req.query);
-
             return res.redirect('/?seasonYear=2021&season=spring&sort=popularity_desc&perPage=30&page=1')
         }
 

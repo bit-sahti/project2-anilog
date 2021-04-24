@@ -184,19 +184,12 @@ class AniListHandler {
             }
         `
 
-        // ${this.mediaParams}
-
-        // console.log(query);
-
         return [query, variables]
     }
 
     async searchMedia(params) {
-        const query = this.getMediaQuery(params)[0]
-        const variables = this.getMediaQuery(params)[1]
-
-        // console.log(query);
-        console.log(variables);
+        const query = this.getMediaQuery(params)[0];
+        const variables = this.getMediaQuery(params)[1];
 
         try {
             const response = await axios({
