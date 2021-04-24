@@ -23,9 +23,11 @@ const Anime = model('Anime', new Schema({
     //Descriptive info
     description: String,
     genres: [String],
-    generalTags: [String],
-    spoilerTags: [String],
-    adultTags: [String],
+    tags: {
+        general: [String],
+        spoiler: [String],
+        adult: [String],
+    },
     status: String,
     averageScore: Number,
     //Format info

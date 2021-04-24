@@ -146,14 +146,14 @@
                 <div class="tags">
                     <h2>Tropes</h2>
                     <div class="general">
-                        {{#each anime.generalTags}}
+                        {{#each anime.tags.general}}
                             <span class="ui small blue button">{{this}}</span>
                         {{/each}}
                     </div>
-                    {{#if anime.spoilerTags}}
+                    {{#if anime.tags.spoiler}}
                         <button class="ui small red basic button" id="show-spoilers">Show spoiler tropes</button>
                         <div class="spoilerTags hidden">
-                            {{#each anime.spoilerTags}}
+                            {{#each anime.tags.spoiler}}
                                 <span class="ui small red button">{{this}}</span>
                             {{/each}}
                         </div>
