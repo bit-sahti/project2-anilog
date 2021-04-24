@@ -5,7 +5,7 @@
 /* Header */
 
 header {
-    margin: 0 auto 3rem;
+    margin: 3rem auto;
     width: 80%;
     /* background-color: lightblue; */
 }
@@ -65,7 +65,8 @@ section {
     display: flex;
 }
 
-#perPage {
+#perPage,
+#page {
     width: clamp(5rem, 6rem, 8rem);
 }
 

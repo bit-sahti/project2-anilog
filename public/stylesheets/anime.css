@@ -48,10 +48,6 @@ main {
     /* border: 1px solid black; */
 }
 
-.aditional-info {
-    grid-template-columns: 215px auto 215px;
-}
-
 .main-info {
     margin-bottom: 2.5rem;
 }
@@ -59,7 +55,6 @@ main {
 .main-info .container {
     min-height: 240px;
 }
-
 
     /* Cover */
 
@@ -135,13 +130,16 @@ main {
 
 /* Bottom part (aditional info) */
 
+.aditional-info {
+    grid-template-columns: 215px auto 215px;
+}
+
 .aditional-info .container > div {
     margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 5px;
     background-color: white;
 }
-
     /* Details */
 
 .details h6 {
