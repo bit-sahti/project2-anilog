@@ -12,6 +12,7 @@ class AniListHandler {
         this.mediaSearchParams = `type: ANIME, isAdult: false`
         this.mediaParams = `
                 id
+                updatedAt
                 isAdult
                 title {
                     romaji
@@ -139,8 +140,7 @@ class AniListHandler {
         const entries = validProps.map(( [ key, value ] ) => key);
 
         const entriesValues = validProps.map(( [key, value] ) => value);
-
-        console.log(entries, entriesValues);
+        
         const queryParams = entries.map(entry => {
             switch(entry) {
                 case 'search':
@@ -169,10 +169,6 @@ class AniListHandler {
             if (prop === 'season' || prop === 'status' || prop === 'format' || prop === 'sort') {
                 acc[prop] = acc[prop].toUpperCase()
             }
-
-            // if (prop === 'seasonYear') {
-            //     acc.seasonYear = Number(entriesValues[i])
-            // }
 
             return acc
         }, {})

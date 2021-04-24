@@ -61,6 +61,7 @@ class Mapper {
     formatData(anime){
         return {
                 externalId: anime.id,
+                externalVersion: anime.updatedAt,
                 isAdult: anime.isAdult,
                 title: anime.title,
                 synonyms: anime.synonyms,

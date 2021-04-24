@@ -3,6 +3,7 @@ const { Schema, Types, model } = require('mongoose');
 const Anime = model('Anime', new Schema({
     //Basic search info
     externalId: { type: Number, required: true, unique: true },
+    externalVersion: Number,
     isAdult: Boolean,
     //Identification
     title: {
