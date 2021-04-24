@@ -36,7 +36,11 @@ $('.ui.form')
           {
             type: 'minLength[3]',
             prompt: 'The username must be at least 3 characters long.'
-          }
+          },
+          {
+            type: 'maxLength[30]',
+            prompt: 'The username must be 30 charaters or bellow.'
+          },
         ]
       },
       email: {
@@ -48,6 +52,13 @@ $('.ui.form')
           }
         ]
       },
+      birthDate: {
+        identifier: 'birthDate',
+        rules: {
+          type: 'empty',
+          prompt: 'Please enter your birthdate.'
+        }
+      },
       password: {
         identifier: 'password',
         rules: [
@@ -56,8 +67,8 @@ $('.ui.form')
             prompt: 'Enter a password'
           },
           {
-            type: 'minLength[10]',
-            prompt: 'The password must be at least 10 character long. We recommend you use  a custom phrase.'
+            type: 'minLength[6]',
+            prompt: 'The password must have at least 6 characters. The longer, the better.'
           }
         ]
       },
@@ -84,14 +95,10 @@ $('.ui.form')
         rules: [
           {
             type: 'empty',
-            prompt: 'Enter the correct answer to you reset question.'
+            prompt: 'Enter the correct answer to your reset question.'
           }
         ]
       }
-      
-
-
-
     }
   })
 ;
