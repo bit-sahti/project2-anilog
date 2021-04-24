@@ -24,11 +24,39 @@
     </div>
       <div class="secondary-nav">
         {{#unless currentUser}}
-          <a href="/login" class="ui button">Login</a>
+          <a href="/login" class="ui button" id="login">Log in</a>
           <a href="/signup" class="ui primary button"><strong>Sign up</strong></a>
+          <div class="ui modal">            
+                <div>
+                  <h1>Login</h1>
+                </div>
+                <form action="/login" method="POST" class="ui massive form error">
+                  <div class="field">
+                    <input type="email" name="email" placeholder="Email">
+                  </div>
+
+                  <div class="field">
+                    <input type="password" name="password" placeholder="Password">
+                  </div>
+
+                  {{#if authError}}
+                    <div class="ui error message">
+                        <div class="header">{{authError}}</div>
+                    </div>
+                  {{/if}}
+
+                  <div class="btn field">
+                    <button class="ui blue button">Sign in</button>
+                  </div>
+                </form>
+                <div class="reset-container">
+                  <a href="/reset">Forgot your password?</a>
+                </div>            
+          </div>
+
         {{/unless}}
         {{#if currentUser}}
-          <a href="/logout" class="logout">Logout</a>
+          <a href="/logout" class="logout">Log out</a>
         {{/if}}
       </div>
   </nav>
@@ -44,6 +72,4 @@
   </footer>
     
 </body>
-    
-
 </html>

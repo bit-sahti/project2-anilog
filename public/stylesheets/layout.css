@@ -87,6 +87,43 @@ nav a {
     opacity: .7;
 }
 
+/* Modal */
+.ui.modal {
+    padding: 4rem 2rem;
+    min-height: 30rem;
+    max-width: 30rem;
+    border-radius: 2rem;
+    background-color: #E5EBF1;
+
+}
+
+.ui.modal h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #2B3762;
+}
+
+.ui.modal .btn.field {
+    display: flex;
+    justify-content: center;
+}
+
+.ui.modal .ui.button {
+    font-size: 1.5rem;
+} 
+
+.ui.modal .reset-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+}
+
+.ui.modal .reset-container a {
+    font-size: 1.2rem;
+}
+
+
 /* Footer */
 
 footer {

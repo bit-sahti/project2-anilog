@@ -68,12 +68,16 @@ router.post('/login', async (req, res, next) => {
         
         req.session.currentUser = userFromDb._id;
 
-        res.redirect('/')
+        res.redirect('back')
     }
 
     catch(err) {
         console.log(err);
     }
+})
+
+router.get('/reset', (req, res, next) => {
+    res.render('./errors/building')
 })
 
 router.get('/logout', (req, res, next) => {
