@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="/stylesheets/profile-edition.css">
+
+<main>
+    <form action="/{{currentUser}}/profile/edit" method="POST" enctype="multipart/form-data" class="ui big form error">
+        <div class="public-info">
+            <h4 class="ui dividing header">General information</h4>
+            <div class="field">     
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="{{profileUser.username}}">
+                {{#if nameTaken}}
+                    <div class="ui error message" id="usernameError">                    
+                        <p>Username unavailable. Please choose another one.</p>
+                    </div>
+
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="avatarPicture">Upload an avatar picture.</label>
+                <input type="file" name="avatarPicture" id="avatarPicture">
+            </div>
+            <div class="field">
+                <label for="preferedGenres">Prefered genres - choose up to three</label>
+                <select name="preferedGenres" id="prefered-genres" class="ui clearable search selection dropdown" multiple="">
+                    <option value="">Any</option>
+                    <option value="action" {{#if profileUser.action}} selected {{/if}}>Action</option>
+                    <option value="adventure"{{#if profileUser.adventure}} selected {{/if}}>Adventure</option>
+                    <option value="comedy"{{#if profileUser.comedy}} selected {{/if}}>Comedy</option>
+                    <option value="drama"{{#if profileUser.drama}} selected {{/if}}>Drama</option>
+                    <option value="ecchi"{{#if profileUser.ecchi}} selected {{/if}}>Ecchi</option>
+                    <option value="fantasy"{{#if profileUser.fantasy}} selected {{/if}}>Fantasy</option>
+                    <option value="mahou shoujo"{{#if profileUser.[mahou shoujo]}} selected {{/if}}>Mahou shoujo</option>
+                    <option value="mecha"{{#if profileUser.mecha}} selected {{/if}}>Mecha</option>
+                    <option value="music"{{#if profileUser.music}} selected {{/if}}>Music</option>
+                    <option value="mytery"{{#if profileUser.mytery}} selected {{/if}}>Mistery</option>
+                    <option value="psychological" {{#if profileUser.psychological}} selected {{/if}}>Psychological</option>
+                    <option value="sci-fi"{{#if profileUser.sci-fi}} selected {{/if}}>Sci-fi</option>
+                    <option value="slice of life"{{#if profileUser.[slice of life]}} selected {{/if}}>Slice of Life</option>
+                    <option value="sports"{{#if profileUser.sports}} selected {{/if}}>Sports</option>
+                    <option value="supernatural"{{#if profileUser.supernatural}} selected {{/if}}>Supernatural</option>
+                    <option value="thriller"{{#if profileUser.thriller}} selected {{/if}}>Thriller</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="description">Tell us a little about you.</label>
+                <textarea name="description" id="description" cols="30" rows="10">{{profileUser.description}}</textarea>
+            </div>
+            <h4 class="ui dividing header">Social media links</h4>
+            <div class="media-info">
+                <div class="social-media">
+                    <p>  By default, only your friends can see this information, but you can choose to it make public.</p>
+                    <div class="field">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" name="facebook" id="facebook" {{#if profileUser.socialMedia.facebook}} value="{{profileUser.socialMedia.facebook}} {{/if}}">
+                    </div>
+                    <div class="field">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" name="twitter" id="twitter" {{#if profileUser.socialMedia.twitter}} value="{{profileUser.socialMedia.twitter}} {{/if}}">
+                    </div>
+                    <div class="field">
+                        <label for="discord">Discord</label>
+                       
+                        <input type="text" name="discord" id="discord" {{#if profileUser.socialMedia.discord}} value="{{profileUser.socialMedia.discord}}" {{/if}}>
+                    </div>
+
+                    <div class="field">
+                        <label for="isPublic">Do you want this information to be public?</label>
+                        <input type="radio" name="isPublic" id="isPublic" value="true"  {{#if profileUser.socialMedia.isPublic}} checked {{/if}}>
+                        <span>Yes</span>
+                        <input type="radio" name="isPublic" id="isPublic" value="false"  {{#unless profileUser.socialMedia.isPublic}} checked {{/unless}}>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <div class="btn-container">
+            <button class="ui big center aligned blue button">Update profile</button>
+       </div>
+    </form>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+<script src="/scripts/user/profile.edition.js"></script>

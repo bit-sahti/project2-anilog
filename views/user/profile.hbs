@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/stylesheets/profile.css">
+<main>
+    <div class="header">
+        <a href="{{profileUser.avatarPicture}}" target="_blank" ><div class="avatar" style="background-image: url({{profileUser.avatarPicture}}"></div></a>
+    
+        <div class="username">
+            <h1>{{profileUser.username}}</h1>           
+        </div>
+    </div>
+
+    <section class="info">
+        <div>
+            <h2>Description</h2>
+            <p>{{profileUser.description}}</p>
+        </div>
+
+        <div>
+            <h2>Favorite genres</h2>
+            <div class="ui bulleted list">
+                {{#each profileUser.preferedGenres}}
+                    <div class="item">{{this}}</div>
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <h2>Catalogue</h2>
+            <a href="/{{profileUser._id}}/lists">See {{profileUser.username}}'s catalogue</a>
+        </div>
+
+        {{#if profileUser.socialMedia.isPublic}}
+            <div>
+                <h2>Social Media</h2>
+                <div class="ui link list">
+                    {{#if profileUser.socialMedia.facebook}}
+                        <a href="{{profileUser.socialMedia.facebook}}">
+                            <li class="item">Facebook</li>
+                        </a>
+                    {{/if}}
+                    {{#if profileUser.socialMedia.twitter}}
+                    <a href="{{profileUser.socialMedia.twitter}}">
+                        <li>Twitter</li>
+                    </a>
+                    {{/if}}
+                    {{#if profileUser.socialMedia.discord}}
+                        <a href="{{profileUser.socialMedia.discord}}">
+                            <li>Discord</li>
+                        </a>
+                    {{/if}}
+                </div>    
+            </div>
+        {{/if}}
+    </section>
+
+    {{#if isCurrentUser}}
+        <div class="edit-btn">
+            <a href="/{{currentUser}}/profile/edit"><div class="ui big teal icon button">
+                <i class="edit icon"></i>
+                Edit
+            </div></a>
+        </div>
+    {{/if}}
+</main>

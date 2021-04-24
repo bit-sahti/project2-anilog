@@ -1,0 +1,30 @@
+main {
+    margin: 4rem auto;
+    padding: 2rem 4rem;
+    width: 50%;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+main > div {
+    margin-bottom: 3rem;
+}
+
+.ui.form .field > label{
+    font-size: 1.3rem;
+}
+
+.ui.dividing.header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.btn-container {
+    display: flex;
+    margin: 2rem;
+}
+
+.ui.button {
+    margin: auto;
+}
