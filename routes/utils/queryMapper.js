@@ -41,8 +41,6 @@ class queryMapper {
     getSortingFactor(querySort) {
         if (!querySort) return null;
 
-        console.log(querySort);
-
         return { [querySort]: true };
     }
 
@@ -57,9 +55,7 @@ class queryMapper {
         const page = { page: query.page }
         const perPage = { perPage: query.perPage }
 
-        const formattedQuery = Object.assign({}, search, genres, year, season, status, format, sort, page, perPage)
-
-        console.log('formated query ===>', formattedQuery);
+        const formattedQuery = Object.assign({}, search, genres, year, season, status, format, sort, page, perPage);
 
         return formattedQuery
     }

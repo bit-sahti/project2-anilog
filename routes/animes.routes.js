@@ -25,7 +25,6 @@ router.get('/', async (req, res, next) => {
         
     } else {
         anime = await AniList.getAnime(animeId);
-        console.log(anime);
     }  
 
     res.render('./animes/anime', { 

@@ -14,18 +14,12 @@ const decrypt = (password, hash) => {
 }
 
 router.get('/signup', (req, res, next) => {
-    console.log('Get request on sign up route')
     res.render('signup')
 })
 
 router.post('/signup', async (req, res, next) => {
-    console.log('Post request on sign up route');
     
-    const { username, email, birthDate, password, resetPassQuestion, resetPassAnswer } = req.body
-
-    console.log(birthDate);
-
-    console.log(typeof birthDate);
+    const { username, email, birthDate, password, resetPassQuestion, resetPassAnswer } = req.body;
 
     const newUser = {
         username,
@@ -37,18 +31,14 @@ router.post('/signup', async (req, res, next) => {
     }
 
     try {
-        const userExists = await User.findOne({ email: email }) ? true : false
-        const nameTaken = await User.findOne({ username }) ? true : false
+        const userExists = await User.findOne({ email: email }) ? true : false;
+        const nameTaken = await User.findOne({ username }) ? true : false;
 
         if (userExists || nameTaken) {
-            // console.log(userFromDb, nameTaken)
             return res.render('signup', { fields: req.body, userExists, nameTaken })
         }
 
-
         const currentUser = await User.create(newUser);
-
-        console.log(currentUser);
 
         req.session.currentUser = currentUser._id;
         
@@ -77,8 +67,6 @@ router.post('/login', async (req, res, next) => {
         }
         
         req.session.currentUser = userFromDb._id;
-
-        console.log(req.session.currentUser);
 
         res.redirect('/')
     }
