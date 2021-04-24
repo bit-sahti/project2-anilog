@@ -14,9 +14,7 @@ const decrypt = (password, hash) => {
 }
 
 router.get('/signup', (req, res, next) => {
-    const { currentUser } = req.session;
-
-    if (currentUser) return res.render('signup', { currentUser })
+    if (req.session.currentUser) return res.redirect('/');
 
     res.render('signup')
 });
@@ -53,10 +51,9 @@ router.post('/signup', async (req, res, next) => {
 })
 
 router.get('/login', (req, res, next) => {
-    const { currentUser } = req.session;
+    if (req.session.currentUser) return res.redirect('/');
 
-    if (currentUser) return res.render('login', { currentUser })
-    res.render('login')
+    res.render('login');
 });
 
 router.post('/login', async (req, res, next) => {
