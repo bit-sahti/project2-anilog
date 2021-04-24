@@ -1,0 +1,18 @@
+main {
+    display: flex;
+    height: 100%;
+}
+
+main > div {
+    margin: auto;
+    height: 20rem;
+}
+
+h1 {
+    margin-bottom: 3rem;
+    font-size: 4rem;
+}
+
+p {
+    font-size: 2rem;
+}

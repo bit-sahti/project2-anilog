@@ -22,7 +22,7 @@ router.get('/:userId/profile', async (req, res, next) => {
     }
 
     catch(err) {
-        console.log(err);
+        next(err);
     }
 })
 
@@ -51,7 +51,7 @@ router.get('/:userId/lists', async (req, res, next) => {
     }
 
     catch (err) {
-        console.log(err)
+        next(err)
     }
 
 })
@@ -61,8 +61,6 @@ router.use('/', (req, res, next) => {
     const { currentUser } = req.session;
 
     if (!currentUser) return res.redirect('/login');
-
-    // if (currentUser !== userId) return res.send('Permission denied.')
 
     next();
 })
@@ -87,7 +85,7 @@ router.get('/:userId/profile/edit', async (req, res, next) => {
     }
 
     catch (err) {
-        console.log(err);
+        next(err);
     }
 })
 
@@ -119,7 +117,7 @@ router.post('/:userId/profile/edit', fileUploader.single('avatarPicture'), async
     }
 
     catch(err) {
-        console.log(err);
+        next(err);
     }
 })
 
@@ -149,10 +147,10 @@ router.get('/:userId/lists/add', async (req, res, next) => {
     }
 
     res.redirect('back')
-   }
+    }
 
-   catch(err) {
-    console.log(err);
+    catch(err) {
+        next(err);
     }
 })
 
@@ -177,7 +175,7 @@ router.get('/:userId/lists/remove', async (req, res, next) => {
    }
 
    catch(err) {
-        console.log('error ========> ', err);
+        next(err);
     }
 })
 
@@ -203,10 +201,10 @@ router.get('/:userId/lists/edit', async (req, res, next) => {
         await currentUser.save();
 
         res.redirect('back')
-   }
+    }
 
-   catch(err) {
-    console.log('error ========> ', err);
+    catch(err) {
+        next(err);
     }
 })
 

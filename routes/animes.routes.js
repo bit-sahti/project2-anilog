@@ -12,34 +12,33 @@ router.get('/', async (req, res, next) => {
     let onFavoritesList = false;
 
    try {
-    let anime = await Anime.findOne({ externalId: animeId });
-
-    
-    if (anime && req.session.currentUser) {
-        const userId = req.session.currentUser;
+        let anime = await Anime.findOne({ externalId: animeId });
         
-        onToWatchList = anime.userActivity.toBeWatchedBy.includes(userId);
-        onWatchingList = anime.userActivity.beingWatchedBy.includes(userId);
-        onWatchedList = anime.userActivity.watchedBy.includes(userId);
-        onFavoritesList = anime.userActivity.favoriteOf.includes(userId);
-        
-    } else {
-        anime = await AniList.getAnime(animeId);
-    }  
+        if (anime && req.session.currentUser) {
+            const userId = req.session.currentUser;
+            
+            onToWatchList = anime.userActivity.toBeWatchedBy.includes(userId);
+            onWatchingList = anime.userActivity.beingWatchedBy.includes(userId);
+            onWatchedList = anime.userActivity.watchedBy.includes(userId);
+            onFavoritesList = anime.userActivity.favoriteOf.includes(userId);
+            
+        } else {
+            anime = await AniList.getAnime(animeId);
+        }  
 
-    res.render('./animes/anime', { 
-        anime: anime, 
-        currentUser: req.session.currentUser,
-        onToWatchList,
-        onWatchedList,
-        onWatchingList,
-        onFavoritesList        
-     })
-   }
+        res.render('./animes/anime', { 
+            anime: anime, 
+            currentUser: req.session.currentUser,
+            onToWatchList,
+            onWatchedList,
+            onWatchingList,
+            onFavoritesList        
+        })
+    }
 
-   catch(err) {
-       console.log(err);
-   }
+    catch(err) {
+        next(err);
+    }
 })
 
 

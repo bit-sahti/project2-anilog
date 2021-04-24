@@ -18,12 +18,8 @@ router.get('/', async (req, res, next) => {
         }
 
     catch (error) {
-        console.log(error);
+        next(error);
     }
 });
-
-router.post('/', (req, res, next) => {
-    console.log(req.body)
-})
 
 module.exports = router;
