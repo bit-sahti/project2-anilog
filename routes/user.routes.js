@@ -1,7 +1,30 @@
 const router = require('express').Router();
+
 const User = require('../models/User');
 const Anime = require('../models/Anime');
-const AniList = require('./utils/backApiHandler')
+const AniList = require('./utils/backApiHandler');
+
+const fileUploader = require('../configs/cloudinary.config'); 
+
+router.get('/:userId/profile', async (req, res, next) => {
+    try {
+        const { currentUser } = req.session;
+        const profileUser = await User.findOne({ _id: req.params.userId })
+
+        let isCurrentUser;
+
+        if (currentUser && profileUser._id.toString() === currentUser.toString()) {
+            isCurrentUser = true;
+        }
+
+        res.render('./user/profile', { currentUser: req.session.currentUser, profileUser, isCurrentUser })
+
+    }
+
+    catch(err) {
+        console.log(err);
+    }
+})
 
 router.get('/:userId/lists', async (req, res, next) => {
     const { userId } = req.params;
@@ -24,10 +47,6 @@ router.get('/:userId/lists', async (req, res, next) => {
             toWatch: toWatch.slice().reverse()
         }
 
-        // console.log(isCurrentUser, userId, currentUser);
-
-        console.log(isCurrentUser);
-
         res.render('./user/lists', { lists: animes, listsOwner: user, currentUser, isCurrentUser})
     }
 
@@ -37,15 +56,71 @@ router.get('/:userId/lists', async (req, res, next) => {
 
 })
 
-router.use('/:userId', (req, res, next) => {
+//Protection route
+router.use('/', (req, res, next) => {
     const { currentUser } = req.session;
-    const { userId } = req.params;
 
     if (!currentUser) return res.redirect('/login');
 
-    if (currentUser !== userId) return res.send('Permission denied.')
+    // if (currentUser !== userId) return res.send('Permission denied.')
 
     next();
+})
+
+//Edition routes
+router.get('/:userId/profile/edit', async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.currentUser);
+
+        const profileUser = {
+            username: user.username,
+            avatarPicture: user.avatarPicture,
+            description: user.description,
+            socialMedia: user.socialMedia
+        }
+
+        user.preferedGenres.forEach(genre => {
+           profileUser[genre] = true;
+        })
+
+        res.render('./user/profile-edition', { currentUser: req.session.currentUser, profileUser })
+    }
+
+    catch (err) {
+        console.log(err);
+    }
+})
+
+router.post('/:userId/profile/edit', fileUploader.single('avatarPicture'), async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.currentUser)
+        const { username, preferedGenres, description, facebook, twitter, discord, isPublic } = req.body;
+        const nameUser = await User.findOne({ username })
+
+        if (nameUser && nameUser._id.toString() !== user._id.toString()) {
+            return res.render('./user/profile-edition', { currentUser: user_id, nameTaken: true, profileUser: user })
+        }
+
+        Object.entries(req.body).forEach(( [ prop, value ]) => {
+            if (prop === 'facebook' || prop === 'twitter' || prop === 'discord' || prop === 'isPublic') {
+                user.socialMedia[prop] = value;
+            }
+
+            user[prop] = value;
+        })
+
+        if (req.file) {
+            user.avatarPicture = req.file.path;
+        };
+
+        await user.save();
+
+        res.redirect(`/${user._id}/profile`);
+    }
+
+    catch(err) {
+        console.log(err);
+    }
 })
 
 router.get('/:userId/lists/add', async (req, res, next) => {
@@ -56,12 +131,8 @@ router.get('/:userId/lists/add', async (req, res, next) => {
     const currentUser = await User.findById(userId);
     let anime = await Anime.findOne({ externalId: animeId });
 
-    // console.log('from db ========> ', anime ? anime._id : 'null')
-
     if (!anime) {
         animeFromAPI = await AniList.getAnime(animeId);
-
-        // console.log('from API =========>', animeFromAPI.externalId);
 
         anime = await Anime.create(animeFromAPI)
     }
@@ -75,20 +146,17 @@ router.get('/:userId/lists/add', async (req, res, next) => {
     if (!currentUser.lists[userList].includes(anime._id)) {
         currentUser.lists[userList].push(anime._id);
         await currentUser.save()
-    }    
-
-    console.log('operation completed ========>', currentUser.lists[userList], anime._id, anime.userActivity[animeList], currentUser._id)
+    }
 
     res.redirect('back')
    }
 
    catch(err) {
-    console.log('error ========> ', err);
+    console.log(err);
     }
 })
 
 router.get('/:userId/lists/remove', async (req, res, next) => {
-    console.log('call on remove route');
     const userId = req.session.currentUser;
     const { id: animeId, userList, animeList } = req.query;
     
@@ -99,16 +167,11 @@ router.get('/:userId/lists/remove', async (req, res, next) => {
         const animeListIndex = anime.userActivity[animeList].indexOf(userId);
         const userListIndex = currentUser.lists[userList].indexOf(anime._id);
 
-        console.log('before removal', animeListIndex, userListIndex );
-
         anime.userActivity[animeList].splice(animeListIndex, 1)
         currentUser.lists[userList].splice(userListIndex, 1)
 
         await anime.save();
         await currentUser.save();
-
-        console.log('after removal',animeListIndex, userListIndex );
-
 
         res.redirect('back')
    }
@@ -121,8 +184,6 @@ router.get('/:userId/lists/remove', async (req, res, next) => {
 router.get('/:userId/lists/edit', async (req, res, next) => {
     const userId = req.session.currentUser;
     const { id: animeId, currentUserList, currentAnimeList, targetUserList, targetAnimeList } = req.query;
-
-    console.log(req.query);
     
     try {
         const currentUser = await User.findById(userId);
